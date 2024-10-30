@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { FormsModule } from '@angular/forms'; // Importe aqui
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,21 +9,13 @@ import { CadastroPessoaComponent } from './components/cadastro-pessoa/cadastro-p
 import { ConsultaPessoaComponent } from './components/consulta-pessoa/consulta-pessoa.component';
 import { NgxMaskModule } from 'ngx-mask';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    CadastroPessoaComponent,
-    ConsultaPessoaComponent
-  ],
-  imports: [
-    
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule, // Adicione aqui
-    NgxMaskModule.forRoot()
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        CadastroPessoaComponent,
+        ConsultaPessoaComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        FormsModule, // Adicione aqui
+        NgxMaskModule.forRoot()], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
