@@ -1,3 +1,13 @@
+.body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url('/assets/img/DALL·E-2024-10-31-14.43.png') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .cadastro-container {
     max-width: 500px;
     margin: 0 auto;
@@ -6,6 +16,7 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    margin-top: 3%;
   }
   
   h1 {

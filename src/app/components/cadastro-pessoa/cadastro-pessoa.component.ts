@@ -16,26 +16,34 @@ export class CadastroPessoaComponent implements OnInit {
   ngOnInit(): void {}
 
   adicionarPessoa(): void {
-    // Remove pontos e traço antes de validar e enviar
+    console.log('CPF inserido:', this.novaPessoa.cpf); // Verifica o valor capturado
     const cpfNumerico = this.novaPessoa.cpf.replace(/\D/g, '');
-  
+    console.log('CPF após formatação:', cpfNumerico);
+
     if (cpfNumerico.length !== 11) {
-      alert('O CPF deve conter 11 dígitos.');
-      return;
+        alert('O CPF deve conter 11 dígitos.');
+        return;
     }
+
   
-    this.pessoaService.adicionarPessoa(this.novaPessoa).subscribe(
-      (pessoa) => {
+    this.pessoaService.adicionarPessoa(this.novaPessoa).subscribe({
+      next: (pessoa) => {
         alert('Pessoa cadastrada com sucesso!');
         console.log('Pessoa adicionada com sucesso:', pessoa);
+        // Limpa o formulário após o cadastro com sucesso
         this.novaPessoa = { id: 0, nome: '', cpf: '', telefone: '', loginGov: '', senhaGov: '' };
       },
-      (error) => {
+      error: (error) => {
         console.error('Erro ao adicionar pessoa:', error);
-        const mensagemErro = error.error?.message || 'Erro ao cadastrar pessoa. Tente novamente.';
-        alert(mensagemErro);
+        const mensagemErro = error.error.message || 'Erro ao cadastrar pessoa. CPF duplicado.' ;
+        alert(mensagemErro); // Exibe a mensagem de erro retornada pelo backend
+      },
+      complete: () => {
+        console.log('Operação de cadastro de pessoa concluída.');
       }
-    );
+    });
+    
+    
   }
   
   

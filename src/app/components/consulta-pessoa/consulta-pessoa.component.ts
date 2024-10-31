@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PessoaService } from '../../services/pessoa.service';
-import { Pessoa } from '../../services/pessoa.service';
+import { PessoaService, Pessoa } from '../../services/pessoa.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,6 +12,8 @@ export class ConsultaPessoaComponent implements OnInit {
   filtroCpf: string = '';
   pessoas: Pessoa[] = [];
   pessoasFiltradas: Pessoa[] = [];
+  exibirResultados: boolean = false;
+
 
   constructor(private pessoaService: PessoaService, private router: Router) {}
 
@@ -28,15 +29,29 @@ export class ConsultaPessoaComponent implements OnInit {
   }
 
   consultar(): void {
+    const nomeFiltroLower = this.filtroNome ? this.filtroNome.toLowerCase() : '';
+    const cpfFiltroLower = this.filtroCpf ? this.filtroCpf.toLowerCase() : '';
+
     this.pessoasFiltradas = this.pessoas.filter(pessoa => {
-      return (
-        (!this.filtroNome || pessoa.nome.includes(this.filtroNome)) &&
-        (!this.filtroCpf || pessoa.cpf.includes(this.filtroCpf))
-      );
+        const nomeLower = pessoa.nome.toLowerCase();
+        const cpfLower = pessoa.cpf.toLowerCase();
+
+        return (
+            (!nomeFiltroLower || nomeLower.includes(nomeFiltroLower)) &&
+            (!cpfFiltroLower || cpfLower.includes(cpfFiltroLower))
+        );
     });
-  }
+
+    this.exibirResultados = true;
+    this.filtroNome = '';
+    this.filtroCpf = '';
+}
+
+
+  
+  
+
   irParaCadastro(): void {
-    // Redireciona para a tela de cadastro
     this.router.navigate(['/cadastro-pessoas']);
   }
 }

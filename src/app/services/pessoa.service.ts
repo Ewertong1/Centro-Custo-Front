@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Pessoa {
@@ -27,5 +27,15 @@ export class PessoaService {
     return this.http.post<Pessoa>(this.apiUrl, pessoa);
   }
 
-  // Outros métodos, se necessário
+  consultarPessoas(nome?: string, cpf?: string): Observable<Pessoa[]> {
+    let params = new HttpParams();
+    if (nome) {
+      params = params.set('nome', nome);
+    }
+    if (cpf) {
+      params = params.set('cpf', cpf);
+    }
+    
+    return this.http.get<Pessoa[]>(this.apiUrl, { params });
+  }
 }

@@ -11,18 +11,17 @@
       <input
         id="cpf"
         [(ngModel)]="novaPessoa.cpf"
+        name="cpf"
         type="text"
         placeholder="Digite o CPF"
         class="form-control"
-        [mask]="'000.000.000-00'"
-        maxlength="14"
+        maxlength="11"
       />
     </div>
-    
     <br/>
     <div class="form-group">
       <label for="telefone">Telefone:</label>
-      <input type="text" id="telefone" [(ngModel)]="novaPessoa.telefone"  name="phone"/>
+      <input type="text" id="telefone" [(ngModel)]="novaPessoa.telefone" name="phone"/>
     </div>
     <br/>
     <div class="form-group">
@@ -32,11 +31,10 @@
     <br/>
     <div class="form-group">
       <label for="senhaGov">Senha Gov:</label>
-      <input type="password" id="senhaGov" [(ngModel)]="novaPessoa.senhaGov" name="password" />
+      <input type="text" id="senhaGov" [(ngModel)]="novaPessoa.senhaGov" name="password" />
     </div>
     <br/>
     <button (click)="adicionarPessoa()" class="btn">Adicionar</button>
     <button (click)="irParaConsulta()" class="btn btn-secondary">Ir para Consulta</button>
   </form>
 </div>
-
