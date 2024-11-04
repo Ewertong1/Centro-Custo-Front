@@ -7,18 +7,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CadastroPessoaComponent } from './components/cadastro-pessoa/cadastro-pessoa.component';
 import { ConsultaPessoaComponent } from './components/consulta-pessoa/consulta-pessoa.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+
 
 @NgModule({
     declarations: [
         AppComponent,
         CadastroPessoaComponent,
-        ConsultaPessoaComponent
+        ConsultaPessoaComponent,
+        LoginComponent
     ],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
-        FormsModule // Import FormsModule para ngModel
+        FormsModule,
+        ReactiveFormsModule
     ],
     providers: [provideHttpClient(withInterceptorsFromDi())]
 })
