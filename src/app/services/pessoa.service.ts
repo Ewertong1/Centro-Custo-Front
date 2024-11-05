@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 export interface Pessoa {
   id: number | null;
@@ -17,14 +18,20 @@ export interface Pessoa {
 export class PessoaService {
   private apiUrl = '/api/pessoas';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   listarPessoas(): Observable<Pessoa[]> {
-    return this.http.get<Pessoa[]>(this.apiUrl);
+    const token = this.authService.getToken(); // Recupera o token do AuthService
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`); // Adiciona o token ao cabeçalho
+
+    return this.http.get<Pessoa[]>(this.apiUrl, { headers });
   }
 
   adicionarPessoa(pessoa: Pessoa): Observable<Pessoa> {
-    return this.http.post<Pessoa>(this.apiUrl, pessoa);
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.post<Pessoa>(this.apiUrl, pessoa, { headers });
   }
 
   consultarPessoas(nome?: string, cpf?: string): Observable<Pessoa[]> {
@@ -35,7 +42,10 @@ export class PessoaService {
     if (cpf) {
       params = params.set('cpf', cpf);
     }
-    
-    return this.http.get<Pessoa[]>(this.apiUrl, { params });
+
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get<Pessoa[]>(this.apiUrl, { params, headers });
   }
 }

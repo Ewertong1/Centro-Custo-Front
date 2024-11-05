@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -19,7 +19,18 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('token'); // Deve retornar true se o token existe
+    return !!localStorage.getItem('token'); 
   }
+
+  getPessoas(): Observable<any> {
+    const token = localStorage.getItem('token'); // Pega o token do localStorage
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`); // Adiciona o token ao cabeçalho
+    
+    return this.http.get<any>('http://localhost:8080/api/pessoas', { headers });
+  }
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+  
   
 }
