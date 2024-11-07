@@ -9,6 +9,8 @@ import { CadastroPessoaComponent } from './components/cadastro-pessoa/cadastro-p
 import { ConsultaPessoaComponent } from './components/consulta-pessoa/consulta-pessoa.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { CommonModule } from '@angular/common';
+import { ConsultaUsuarioComponent } from './components/consulta-usuario/consulta-usuario.component';
 
 
 @NgModule({
@@ -16,6 +18,7 @@ import { LoginComponent } from './login/login.component';
         AppComponent,
         CadastroPessoaComponent,
         ConsultaPessoaComponent,
+        ConsultaUsuarioComponent,
         LoginComponent
     ],
     bootstrap: [AppComponent],
@@ -23,7 +26,8 @@ import { LoginComponent } from './login/login.component';
         BrowserModule,
         AppRoutingModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        CommonModule
     ],
     providers: [provideHttpClient(withInterceptorsFromDi())]
 })

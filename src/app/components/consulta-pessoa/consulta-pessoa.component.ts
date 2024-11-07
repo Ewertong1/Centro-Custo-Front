@@ -51,7 +51,7 @@ export class ConsultaPessoaComponent implements OnInit {
   
   
 
-  irParaCadastro(): void {
+  irParaConsulta(): void {
     this.router.navigate(['/cadastro-pessoas']);
   }
 }

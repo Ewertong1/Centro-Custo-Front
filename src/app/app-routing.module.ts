@@ -5,12 +5,17 @@ import { ConsultaPessoaComponent } from './components/consulta-pessoa/consulta-p
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { MenuComponent } from './components/menu/menu.component';
+import { CadastroUsuarioComponent } from './components/cadastro-usuario/cadastro-usuario.component';
+import { ConsultaUsuarioComponent } from './components/consulta-usuario/consulta-usuario.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'menu', component: MenuComponent, canActivate: [AuthGuard] },
   { path: 'cadastro-pessoas', component: CadastroPessoaComponent, canActivate: [AuthGuard] },
   { path: 'consulta-pessoas', component: ConsultaPessoaComponent, canActivate: [AuthGuard] },
+  { path: 'cadastro-usuario', component: CadastroUsuarioComponent ,canActivate: [AuthGuard] },
+  { path: 'consulta-usuario', component: ConsultaUsuarioComponent, canActivate: [AuthGuard] },
+
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' }
 ];
