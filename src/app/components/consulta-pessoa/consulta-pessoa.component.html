@@ -26,6 +26,7 @@
           <th>Telefone</th>
           <th>Login Gov</th>
           <th>Senha Gov</th>
+          <th>Detalhar</th>
         </tr>
       </thead>
       <tbody>
@@ -35,6 +36,9 @@
           <td>{{ pessoa.telefone }}</td>
           <td>{{ pessoa.loginGov }}</td>
           <td>{{ pessoa.senhaGov }}</td>
+          <td>
+            <button (click)="detalharPessoa(pessoa.id)" class="btn btn-info">Detalhar</button>
+          </td>
         </tr>
       </tbody>
     </table>

@@ -1,0 +1,33 @@
+
+  
+  <div class="detalhes-container">
+    <h1>Detalhes da Pessoa</h1>
+  
+    <div class="detalhes-info">
+      <p><strong>Nome:</strong> {{ pessoaSelecionada?.nome }}</p>
+      <p><strong>CPF:</strong> {{ pessoaSelecionada?.cpf }}</p>
+    </div>
+  
+    <h2>Arquivos Associados</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Descrição</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let arquivo of arquivos">
+          <td>{{ arquivo.descricao }}</td>
+          <td>
+            <button (click)="visualizarArquivo(arquivo)" class="btn btn-info">Visualizar</button>
+            <button (click)="baixarArquivo(arquivo)" class="btn btn-success">Baixar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <button (click)="voltar()" class="btn btn-secondary">Voltar</button>
+  </div>
+  
+  

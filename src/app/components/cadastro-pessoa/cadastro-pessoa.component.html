@@ -1,11 +1,12 @@
 <div class="cadastro-container">
   <h1>Cadastro de Pessoas</h1>
   <form class="form-cadastro">
+    <!-- Campos existentes -->
     <div class="form-group">
       <label for="nome">Nome:</label>
-      <input type="text" id="nome" [(ngModel)]="novaPessoa.nome" name="nome"/>
+      <input type="text" id="nome" [(ngModel)]="novaPessoa.nome" name="nome" />
     </div>
-    <br/>
+    <br />
     <div class="form-group">
       <label for="cpf">CPF:</label>
       <input
@@ -18,23 +19,62 @@
         maxlength="11"
       />
     </div>
-    <br/>
+    <br />
     <div class="form-group">
       <label for="telefone">Telefone:</label>
-      <input type="text" id="telefone" [(ngModel)]="novaPessoa.telefone" name="phone"/>
+      <input type="text" id="telefone" [(ngModel)]="novaPessoa.telefone" name="phone" />
     </div>
-    <br/>
+    <br />
     <div class="form-group">
       <label for="loginGov">Login Gov:</label>
       <input type="text" id="loginGov" [(ngModel)]="novaPessoa.loginGov" name="login" />
     </div>
-    <br/>
+    <br />
     <div class="form-group">
       <label for="senhaGov">Senha Gov:</label>
       <input type="text" id="senhaGov" [(ngModel)]="novaPessoa.senhaGov" name="password" />
     </div>
-    <br/>
-    <button (click)="adicionarPessoa()" class="btn">Adicionar</button>
+  
+
+    <!-- Tabela de anexos -->
+    <h2>Anexos</h2>
+    <div *ngIf="anexos.length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th>Documento</th>
+            <th>Descrição</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let anexo of anexos; let i = index">
+            <td>{{ anexo.file.name }}</td>
+            <td>{{ anexo.descricao }}</td>
+            <td>
+              <button (click)="visualizarAnexo(i)" class="btn btn-secondary">Visualizar</button>
+              <button (click)="removerAnexo(i)" class="btn btn-danger">Excluir</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br />
+
+    <!-- Adicionar documentos -->
+    <div>
+      <input class="upload" type="file" (change)="adicionarDocumento($event)" />
+      <input
+        type="text"
+        placeholder="Descrição do documento"
+        [(ngModel)]="descricaoDocumento"
+        name="descricaoDocumento"
+      />
+    </div>
+    <br />
+
+    <!-- Botões -->
+    <button (click)="adicionarPessoa()" class="btn">Salvar Cadastro</button>
     <button (click)="irParaConsulta()" class="btn btn-secondary">Ir para Consulta</button>
   </form>
 </div>

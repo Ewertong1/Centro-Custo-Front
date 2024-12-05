@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
   private apiUrl = 'http://localhost:8080/api/auth/login';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient , private router: Router) {}
 
   login(login: string, senha: string): Observable<any> {
     return this.http.post<any>(this.apiUrl, { login, senha });
@@ -16,6 +17,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 
   isAuthenticated(): boolean {
@@ -32,6 +34,15 @@ export class AuthService {
     return localStorage.getItem('token');
   }
   
+  isAdmin(): boolean {
+    const token = localStorage.getItem('token');
+    // Suponha que o token tenha um payload com as informações do usuário
+    if (token) {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.status === 1; // 1 para admin
+    }
+    return false;
+  }
   
   
 }

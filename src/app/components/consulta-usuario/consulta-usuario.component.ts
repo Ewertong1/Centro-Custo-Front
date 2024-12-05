@@ -12,25 +12,48 @@ import { Router } from '@angular/router';
 })
 export class ConsultaUsuarioComponent implements OnInit {
   usuarios: Usuario[] = [];
+  usuariosFiltrados: Usuario[] = [];
   nome: string = '';
   cpf: string = '';
 
   constructor(private usuarioService: UsuarioService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.listarUsuarios();
+  }
+  listarUsuarios(): void {
+    this.usuarioService.consultarUsuarios().subscribe({
+      next: (usuarios) => {
+        this.usuarios = usuarios;
+        this.usuariosFiltrados = usuarios; // Inicializa `usuariosFiltrados` com todos os usuários
+      },
+      error: (error) => {
+        console.error('Erro ao consultar usuários:', error);
+      }
+    });
+    
+  }
 
   irParaConsulta(): void {
     this.router.navigate(['/cadastro-usuario']);
   }
 
   onConsultar(): void {
-    this.usuarioService.consultarUsuarios(this.nome, this.cpf).subscribe(
-      (usuarios) => {
-        this.usuarios = usuarios;
-      },
-      (error) => {
-        console.error('Erro ao consultar usuários:', error);
-      }
-    );
+    const nomeFiltroLower = this.nome ? this.nome.toLowerCase() : '';
+    const cpfFiltroLower = this.cpf ? this.cpf.toLowerCase() : '';
+  
+    this.usuariosFiltrados = this.usuarios.filter(usuario => {
+      const nomeLower = usuario.nome.toLowerCase();
+      const cpfLower = usuario.cpf.toLowerCase();
+  
+      return (
+        (!nomeFiltroLower || nomeLower.includes(nomeFiltroLower)) &&
+        (!cpfFiltroLower || cpfLower.includes(cpfFiltroLower))
+      );
+    });
+  
+    this.nome = '';  // Limpa o filtro de nome após a consulta
+    this.cpf = '';   // Limpa o filtro de CPF após a consulta
   }
+  
 }

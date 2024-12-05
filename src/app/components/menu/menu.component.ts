@@ -1,13 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-menu',
-  standalone: true,
-  imports: [],
   templateUrl: './menu.component.html',
-  styleUrl: './menu.component.scss'
+  styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent {
+export class MenuComponent implements OnInit {
+  isAdmin: boolean = false;
 
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    // Verificar se o usuário é administrador
+    this.isAdmin = this.authService.isAdmin();
+  }
+
+  logout(): void {
+    this.authService.logout();
+  }
 }

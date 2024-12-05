@@ -16,4 +16,15 @@ export class AuthGuard implements CanActivate {
       return false;
     }
   }
+
+  isAdmin(): boolean {
+    const token = localStorage.getItem('token');
+    // Suponha que o token tenha um payload com as informações do usuário
+    if (token) {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.status === 1; // 1 para admin
+    }
+    return false;
+  }
+  
 }

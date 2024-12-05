@@ -9,7 +9,7 @@
   justify-content: center;
 }
 .cadastro-container {
-    max-width: 500px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
     background-color: #f4f4f9;
@@ -75,4 +75,7 @@
   .btn-secondary:hover {
     background-color: #0b7dda;
   }
-  
+  .upload{
+    background-color: #838683;
+    font-size: 15px;
+  }

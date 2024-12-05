@@ -1,41 +1,35 @@
-.menu-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f2f2f2;
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100%;
+  background-color: #333;
+  color: white;
+  padding-top: 20px;
 }
 
-.menu-box {
-  background-color: #fff;
-  padding: 20px 40px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.sidebar h2 {
+  color: #ffffff;
   text-align: center;
 }
 
-.menu-box h2 {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.menu-box ul {
+.sidebar ul {
   list-style-type: none;
   padding: 0;
 }
 
-.menu-box li {
-  margin: 10px 0;
+.sidebar ul li {
+  padding: 10px;
+  text-align: center;
 }
 
-.menu-box a {
-  color: #007bff;
+.sidebar ul li a {
+  color: #ffffff;
   text-decoration: none;
-  font-size: 18px;
+  display: block;
 }
 
-.menu-box a:hover {
-  text-decoration: underline;
+.sidebar ul li a:hover {
+  background-color: #575757;
 }
-

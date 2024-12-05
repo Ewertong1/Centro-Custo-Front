@@ -11,6 +11,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { CommonModule } from '@angular/common';
 import { ConsultaUsuarioComponent } from './components/consulta-usuario/consulta-usuario.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { DetalhesPessoaComponent } from './detalhes-pessoa/detalhes-pessoa.component';
 
 
 @NgModule({
@@ -19,6 +21,8 @@ import { ConsultaUsuarioComponent } from './components/consulta-usuario/consulta
         CadastroPessoaComponent,
         ConsultaPessoaComponent,
         ConsultaUsuarioComponent,
+        DetalhesPessoaComponent,
+        MenuComponent,
         LoginComponent
     ],
     bootstrap: [AppComponent],

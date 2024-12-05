@@ -1,3 +1,4 @@
-
-
-<router-outlet></router-outlet>
+<app-menu *ngIf="!isLoginPage"></app-menu>
+<div class="main-content">
+  <router-outlet></router-outlet>
+</div>

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 
 export interface Pessoa {
-  id: number | null;
+  id: number ;
   nome: string;
   cpf: string;
   telefone: string;
@@ -16,7 +16,9 @@ export interface Pessoa {
   providedIn: 'root'
 })
 export class PessoaService {
+
   private apiUrl = '/api/pessoas';
+  private baseUrl = 'http://localhost:8080/api'; 
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -34,6 +36,21 @@ export class PessoaService {
     return this.http.post<Pessoa>(this.apiUrl, pessoa, { headers });
   }
 
+  adicionarPessoaComAnexos(pessoa: Pessoa, anexos: File[]): Observable<Pessoa> {
+    const formData = new FormData();
+    formData.append('pessoa', new Blob([JSON.stringify(pessoa)], { type: 'application/json' }));
+
+    anexos.forEach((arquivo, index) => {
+        formData.append(`anexos`, arquivo, arquivo.name);
+    });
+
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.post<Pessoa>(`${this.apiUrl}/com-anexos`, formData, { headers });
+}
+
+
   consultarPessoas(nome?: string, cpf?: string): Observable<Pessoa[]> {
     let params = new HttpParams();
     if (nome) {
@@ -48,4 +65,24 @@ export class PessoaService {
 
     return this.http.get<Pessoa[]>(this.apiUrl, { params, headers });
   }
+  getPessoaDetalhes(idPessoa: number): Observable<any> {
+    return this.http.get<any>(`/api/pessoa/${idPessoa}/arquivos`);
+  }
+
+  buscarPessoaPorId(idPessoa: number): Observable<any> {
+  
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  
+    return this.http.get(`${this.baseUrl}/pessoas/${idPessoa}`, { headers });
+    
+  }
+  
+  buscarArquivosPorPessoa(idPessoa: number): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  
+    return this.http.get(`${this.baseUrl}/repositorio/pessoa/${idPessoa}/arquivos`, { headers });
+  }
+  
 }

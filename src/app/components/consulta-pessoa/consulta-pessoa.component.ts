@@ -49,7 +49,10 @@ export class ConsultaPessoaComponent implements OnInit {
 
 
   
-  
+detalharPessoa(id: number): void {
+  this.router.navigate(['/detalhes-pessoa', id]); // Redireciona para a rota de detalhes
+}
+
 
   irParaConsulta(): void {
     this.router.navigate(['/cadastro-pessoas']);

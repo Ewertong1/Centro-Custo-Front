@@ -1,6 +1,7 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
+import { AuthService } from './auth.service';
 
 
 export interface Usuario {
@@ -14,17 +15,23 @@ export interface Usuario {
   providedIn: 'root'
 })
 export class UsuarioService {
+  
   private apiUrl = 'http://localhost:8080/api/auth/register';
-  constructor(private http: HttpClient) {}
+  private apiCon = 'http://localhost:8080/api/auth';
+  constructor(private http: HttpClient,private authService: AuthService) {}
+
+  
   registrarUsuario(usuario: Usuario): Observable<any> {
     return this.http.post<any>(this.apiUrl, usuario);
   }
   consultarUsuarios(nome?: string, cpf?: string): Observable<Usuario[]> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     let params = new HttpParams();
     if (nome) params = params.set('nome', nome);
     if (cpf) params = params.set('cpf', cpf);
   
-    return this.http.get<Usuario[]>(`${this.apiUrl}/usuarios`, { params });
+    return this.http.get<Usuario[]>(`${this.apiCon}/usuarios`, {headers, params });
   }
   
 

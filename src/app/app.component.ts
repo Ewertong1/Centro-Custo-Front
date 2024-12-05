@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'cadastro-pessoas';
+
+
+  isLoginPage: boolean = false;
+
+  constructor(private router: Router) {
+    this.router.events.subscribe(() => {
+      this.isLoginPage = this.router.url === '/login';
+    });}
+    ngOnInit(): void {}
 }
