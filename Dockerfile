@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build --configuration production
+RUN npm run build cadastro-pessoas -- --configuration=production
 
 # Etapa 2: Servir com Nginx
 FROM nginx:alpine AS production-stage
