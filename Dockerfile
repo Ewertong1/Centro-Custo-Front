@@ -1,5 +1,5 @@
 # Etapa 1: Build da aplicação Angular
-FROM node:22 AS build-stage
+FROM node:18 AS build-stage
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
