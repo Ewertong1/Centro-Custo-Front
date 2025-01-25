@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class CadastroUsuarioComponent {
 
   usuario: Usuario = {
+    id:0,
     nome: '',
     cpf: '',
     login: '',

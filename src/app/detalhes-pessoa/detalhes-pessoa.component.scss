@@ -1,54 +1,85 @@
+body {
+  background-size: cover;
+  background-position: center;
+  font-family: Arial, sans-serif;
+}
+
 .detalhes-container {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-  
-    h1 {
-      margin-bottom: 20px;
-    }
-  
-    .detalhes-info {
-      margin-bottom: 20px;
-      text-align: left;
-    }
-  
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-  
-      th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-      }
-  
-      th {
-        background-color: #f4f4f4;
-      }
-    }
-  
-    .btn {
-      margin: 5px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-  
-      &.btn-info {
-        background-color: #007bff;
-        color: #fff;
-      }
-  
-      &.btn-success {
-        background-color: #28a745;
-        color: #fff;
-      }
-  
-      &.btn-secondary {
-        background-color: #6c757d;
-        color: #fff;
-      }
-    }
-  }
-  
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  text-align: center;
+}
+
+h1, h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.detalhes-info {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  text-align: left;
+}
+
+.table th, .table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.table th {
+  background-color: #007bff;
+  color: white;
+}
+
+.table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.table tr:hover {
+  background-color: #ddd;
+}
+
+.btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-info {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-info:hover {
+  background-color: #0056b3;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}

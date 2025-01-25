@@ -5,6 +5,7 @@ import { AuthService } from './auth.service';
 
 
 export interface Usuario {
+  id: number;
   nome: string;
   cpf: string;
   login: string;
@@ -33,6 +34,13 @@ export class UsuarioService {
   
     return this.http.get<Usuario[]>(`${this.apiCon}/usuarios`, {headers, params });
   }
+  excluirUsuario(id: number): Observable<void> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.delete<void>(`${this.apiCon}/usuarios/${id}`, { headers });
+}
+
   
 
 }

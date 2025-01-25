@@ -19,8 +19,10 @@ export class ConsultaUsuarioComponent implements OnInit {
   constructor(private usuarioService: UsuarioService, private router: Router) {}
 
   ngOnInit(): void {
-    this.listarUsuarios();
-  }
+    this.usuarios = [];
+    this.usuariosFiltrados = [];
+}
+
   listarUsuarios(): void {
     this.usuarioService.consultarUsuarios().subscribe({
       next: (usuarios) => {
@@ -39,21 +41,33 @@ export class ConsultaUsuarioComponent implements OnInit {
   }
 
   onConsultar(): void {
-    const nomeFiltroLower = this.nome ? this.nome.toLowerCase() : '';
-    const cpfFiltroLower = this.cpf ? this.cpf.toLowerCase() : '';
-  
-    this.usuariosFiltrados = this.usuarios.filter(usuario => {
-      const nomeLower = usuario.nome.toLowerCase();
-      const cpfLower = usuario.cpf.toLowerCase();
-  
-      return (
-        (!nomeFiltroLower || nomeLower.includes(nomeFiltroLower)) &&
-        (!cpfFiltroLower || cpfLower.includes(cpfFiltroLower))
-      );
+    this.usuarioService.consultarUsuarios(this.nome, this.cpf).subscribe({
+        next: (usuarios) => {
+            this.usuarios = usuarios;
+            this.usuariosFiltrados = usuarios; // Atualiza os resultados na tabela
+        },
+        error: (error) => {
+            console.error('Erro ao consultar usuários:', error);
+        },
     });
-  
-    this.nome = '';  // Limpa o filtro de nome após a consulta
-    this.cpf = '';   // Limpa o filtro de CPF após a consulta
+}
+
+excluirUsuario(usuario: Usuario): void {
+  if (confirm(`Tem certeza que deseja excluir o usuário ${usuario.nome}?`)) {
+      this.usuarioService.excluirUsuario(usuario.id).subscribe({
+          next: () => {
+              // Remove o usuário excluído da lista local
+              this.usuarios = this.usuarios.filter(u => u.id !== usuario.id);
+              alert('Usuário excluído com sucesso!');
+          },
+          error: (error) => {
+              console.error('Erro ao excluir usuário:', error);
+              alert('Ocorreu um erro ao tentar excluir o usuário.');
+          }
+      });
   }
+}
+
+
   
 }

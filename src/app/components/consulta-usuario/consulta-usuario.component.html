@@ -18,6 +18,7 @@
           <th>CPF</th>
           <th>Login</th>
           <th>Status</th>
+          <th>Ações</th>
         </tr>
       </thead>
       <tbody>
@@ -26,6 +27,11 @@
           <td>{{ usuario.cpf }}</td>
           <td>{{ usuario.login }}</td>
           <td>{{ usuario.status === 1 ? 'Administrador' : 'Usuário' }}</td>
+          <td>
+            <button (click)="excluirUsuario(usuario)" class="btn btn-danger">
+              Excluir
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
