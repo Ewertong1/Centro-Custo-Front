@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build --prod
+RUN npm run build --configuration production
 
 # Etapa 2: Servir com Nginx
 FROM nginx:alpine AS production-stage
