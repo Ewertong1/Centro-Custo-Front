@@ -59,8 +59,9 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": false,
-              "sourceMap": true
+             "optimization": false,
+             "sourceMap": false,
+            "namedChunks": true
              
             },
             "development": {

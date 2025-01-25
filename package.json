@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
-    "build": "ng build cadastro-pessoas --configuration=production"
-,
+    "build": "ng build --configuration=production --source-map=false",
+
    "watch": "ng build --watch --configuration=production",
     "test": "ng test"
   },
