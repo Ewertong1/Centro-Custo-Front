@@ -1,0 +1,49 @@
+<div class="grid-container">
+    <mat-form-field class="full-width">
+        <mat-label>Nome</mat-label>
+        <mat-select [(ngModel)]="filtros.nome">
+            <mat-option *ngFor="let centro of listaCentrosCusto" [value]="centro.nome">
+                {{ centro.nome }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Localização</mat-label>
+        <input matInput [(ngModel)]="filtros.localizacao" placeholder="Digite a localização">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="filtros.status">
+            <mat-option value="PLANEJADA">Planejado</mat-option>
+          <mat-option value="EM_ANDAMENTO">Em andamento</mat-option>
+          <mat-option value="CONCLUIDA">Concluído</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+
+<div class="button-container">
+    <button mat-raised-button color="primary" (click)="buscar()">Buscar</button>
+    <button mat-raised-button color="warn" routerLink="/cadastro-centro-custo">Ir para Cadastro</button>
+</div>
+
+<mat-table [dataSource]="centrosCusto" class="mat-elevation-z8">
+    <ng-container matColumnDef="nome">
+        <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+        <mat-cell *matCellDef="let centro"> {{ centro.nome }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="localizacao">
+        <mat-header-cell *matHeaderCellDef> Localização </mat-header-cell>
+        <mat-cell *matCellDef="let centro"> {{ centro.localizacao }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+        <mat-cell *matCellDef="let centro"> {{ centro.status }} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

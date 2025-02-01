@@ -12,11 +12,10 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   errorMessage: string = '';
 
-  constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
+  constructor(private fb: FormBuilder,
+    private authService: AuthService, 
     private router: Router
-  ) {
+  ) {  // 💡 Certifique-se de que FormBuilder está sendo injetado aqui corretamente
     this.loginForm = this.fb.group({
       login: ['', Validators.required],
       senha: ['', Validators.required]
@@ -32,7 +31,7 @@ export class LoginComponent implements OnInit {
         next: (response) => {
           localStorage.setItem('token', response.token);
          // console.log('Token set:', localStorage.getItem('token')); 
-          this.router.navigate(['/consulta-pessoas']);
+          this.router.navigate(['/cadastro-centro-custo']);
         },
         error: (err) => {
           this.errorMessage = 'Credenciais incorretas ou erro de conexão.';

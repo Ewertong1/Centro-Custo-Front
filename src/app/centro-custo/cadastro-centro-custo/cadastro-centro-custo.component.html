@@ -1,0 +1,83 @@
+<mat-card class="form-container">
+    <h2 class="title">Cadastro Centro de Custo</h2>
+    
+    <form>
+      <div class="grid-container">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Nome do Centro de Custo</mat-label>
+          <input matInput placeholder="Digite o nome" [(ngModel)]="centroCusto.nome" name="nome">
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Localização</mat-label>
+          <input matInput placeholder="Digite a localização" [(ngModel)]="centroCusto.localizacao" name="localizacao">
+        </mat-form-field>
+      </div>
+  
+      <div class="grid-container">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Responsável</mat-label>
+          <input matInput placeholder="Nome do responsável" [(ngModel)]="centroCusto.responsavel" name="responsavel">
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>CREA do Responsável</mat-label>
+          <input matInput placeholder="Digite o CREA" [(ngModel)]="centroCusto.creaResponsavel" name="crea">
+        </mat-form-field>
+      </div>
+  
+      <div class="grid-container">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Valor Total</mat-label>
+          <input matInput type="text" [(ngModel)]="centroCusto.valorTotal" name="valorTotal"
+                 mask="separator.2" prefix="R$ " thousandSeparator="." decimalMarker="," />
+      </mat-form-field>
+      
+      <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Valor em Execução</mat-label>
+          <input matInput type="text" [(ngModel)]="centroCusto.valorEmExecucao" name="valorExecucao"
+                 mask="separator.2" prefix="R$ " thousandSeparator="." decimalMarker="," />
+      </mat-form-field>
+      
+    </div>
+  
+      <div class="grid-container">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Data de Início</mat-label>
+          <input matInput [matDatepicker]="pickerInicio" [(ngModel)]="centroCusto.dataInicio" name="dataInicio">
+          <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+          <mat-datepicker #pickerInicio></mat-datepicker>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Data Prevista para Entrega</mat-label>
+          <input matInput [matDatepicker]="pickerEntrega" [(ngModel)]="centroCusto.dataPrevistaEntrega" name="dataEntrega">
+          <mat-datepicker-toggle matSuffix [for]="pickerEntrega"></mat-datepicker-toggle>
+          <mat-datepicker #pickerEntrega></mat-datepicker>
+        </mat-form-field>
+      </div>
+  <div class="grid-container">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="centroCusto.status" name="status">
+          <mat-option value="PLANEJADA">Planejado</mat-option>
+          <mat-option value="EM_ANDAMENTO">Em andamento</mat-option>
+          <mat-option value="CONCLUIDA">Concluído</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Código CTC</mat-label>
+        <input matInput placeholder="Digite o Código" [(ngModel)]="centroCusto.codigo" name="crea">
+      </mat-form-field>
+    </div>
+  
+      <div class="buttons">
+        <button mat-raised-button class="salvar-btn" (click)="salvar()">Salvar</button>
+        <button mat-raised-button class="consulta-btn" routerLink="/consulta-centro-custo">Ir para Consulta</button>
+      </div>
+      
+    </form>
+  </mat-card>
+
+
