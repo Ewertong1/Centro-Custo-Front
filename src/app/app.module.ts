@@ -22,6 +22,12 @@ import { NgxMaskModule } from 'ngx-mask';
 import { ConsultaCentroCustoComponent } from './centro-custo/consulta-centro-custo/consulta-centro-custo.component';
 import { MatTableModule } from '@angular/material/table';
 
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { SuprimentosModule } from './suprimentos/suprimentos.module';
+
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -31,6 +37,7 @@ import { MatTableModule } from '@angular/material/table';
     ],
     bootstrap: [AppComponent],
     imports: [
+        SuprimentosModule,
         BrowserModule,
         AppRoutingModule,
         FormsModule,
@@ -43,9 +50,16 @@ import { MatTableModule } from '@angular/material/table';
         MatNativeDateModule,  // 💡 Necessário para funcionamento do Datepicker
         MatInputModule,       // 💡 Necessário para os inputs
         MatFormFieldModule,    // 💡 Necessário para os form-fields
-    MatInputModule,      // 💡 Necessário para inputs dentro do mat-form-field
-    MatSelectModule      // 💡 Necessário se estiver usando mat-select
+    MatSelectModule,      // 💡 Necessário se estiver usando mat-select,
+
+    MatGridListModule,
+    MatButtonModule,
+    MatDialogModule
+
+
     ],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideAnimationsAsync()]
+    providers: [provideHttpClient(withInterceptorsFromDi()),
+        provideAnimationsAsync(),
+        provideAnimationsAsync()]
 })
 export class AppModule { }

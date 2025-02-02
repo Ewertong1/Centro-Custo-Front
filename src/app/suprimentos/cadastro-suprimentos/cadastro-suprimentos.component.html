@@ -1,1 +1,124 @@
-<p>cadastro-suprimentos works!</p>
+<div class="container">
+  <h2 class="title">Cadastro de Suprimentos</h2>
+
+  <form [formGroup]="suprimentoForm">
+    <div class="row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nome do Suprimento</mat-label>
+        <input matInput formControlName="nome">
+      </mat-form-field>
+      
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Tipo de Pagamento</mat-label>
+        <mat-select formControlName="tipoPagamento">
+          <mat-option *ngFor="let tipo of tiposPagamento" [value]="tipo.descricao">
+            {{ tipo.descricao }}
+          </mat-option>
+        </mat-select>
+        
+        
+      </mat-form-field>
+      
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Agente</mat-label>
+        <mat-select formControlName="agente">
+          <mat-option *ngFor="let agente of agentes" [value]="agente.idAgente">{{ agente.nome }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-button color="primary">+ Adicionar</button>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Quantidade</mat-label>
+        <input matInput type="number" formControlName="quantidade">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Preço Unitário</mat-label>
+        <input matInput type="text" formControlName="precoUnitario" (input)="formatarPreco()">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Centro de Custo</mat-label>
+        <mat-select formControlName="centroCusto">
+          <mat-option *ngFor="let centro of centrosCusto" [value]="centro.idctocusto">{{ centro.nome }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Unidade de Medida</mat-label>
+        <mat-select formControlName="unidadeMedida">
+          <mat-option *ngFor="let unidade of unidadesMedida" [value]="unidade.idUnidademedida">{{ unidade.descricao }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Seção de Plano de Contas -->
+   <!-- Plano de Contas - Nível 1 -->
+<!-- Plano de Contas - Nível 1 -->
+<!-- Plano de Contas - Nível 1 -->
+<mat-form-field appearance="outline" class="full-width">
+  <mat-label>Plano de Contas - Nível 1</mat-label>
+  <mat-select formControlName="planoContaNivel1" (selectionChange)="onPlanoContaChange(1, $event.value)">
+    <mat-option *ngFor="let plano of planosContaNivel1" [value]="plano.idPlanoConta">
+      {{ plano.descricao }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<!-- Plano de Contas - Nível 2 -->
+<mat-form-field *ngIf="mostrarPlanoConta2" appearance="outline" class="full-width">
+  <mat-label>Plano de Contas - Nível 2</mat-label>
+  <mat-select formControlName="planoContaNivel2" (selectionChange)="onPlanoContaChange(2, $event.value)">
+    <mat-option *ngFor="let plano of planosContaNivel2" [value]="plano.idPlanoConta">
+      {{ plano.descricao }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<!-- Plano de Contas - Nível 3 -->
+<mat-form-field *ngIf="mostrarPlanoConta3" appearance="outline" class="full-width">
+  <mat-label>Plano de Contas - Nível 3</mat-label>
+  <mat-select formControlName="planoContaNivel3" (selectionChange)="onPlanoContaChange(3, $event.value)">
+    <mat-option *ngFor="let plano of planosContaNivel3" [value]="plano.idPlanoConta">
+      {{ plano.descricao }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<!-- Plano de Contas - Nível 4 -->
+<mat-form-field *ngIf="mostrarPlanoConta4" appearance="outline" class="full-width">
+  <mat-label>Plano de Contas - Nível 4</mat-label>
+  <mat-select formControlName="planoContaNivel4">
+    <mat-option *ngFor="let plano of planosContaNivel4" [value]="plano.idPlanoConta">
+      {{ plano.descricao }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+    
+    
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Data de Início</mat-label>
+        <input matInput type="date" formControlName="dataInicio">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Data de Fim</mat-label>
+        <input matInput type="date" formControlName="dataFim">
+      </mat-form-field>
+    </div>
+
+    
+    <div class="buttons">
+      <button mat-raised-button class="salvar-btn" (click)="salvar()">Salvar</button>
+      <button mat-raised-button class="consulta-btn" routerLink="/consulta-suprimentos">Ir para Consulta</button>
+    </div>
+  </form>
+</div>

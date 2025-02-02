@@ -1,49 +1,79 @@
-<div class="grid-container">
-    <mat-form-field class="full-width">
-        <mat-label>Nome</mat-label>
-        <mat-select [(ngModel)]="filtros.nome">
-            <mat-option *ngFor="let centro of listaCentrosCusto" [value]="centro.nome">
-                {{ centro.nome }}
-            </mat-option>
-        </mat-select>
+<div class="container">
+  <h2 class="titulo">Consulta Centro de Custo</h2>
+
+  <div class="grid-container">
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Nome</mat-label>
+      <mat-select [(ngModel)]="filtros.nome">
+        <mat-option *ngFor="let centro of listaCentrosCusto" [value]="centro.nome">
+          {{ centro.nome }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
-    <mat-form-field class="full-width">
-        <mat-label>Localização</mat-label>
-        <input matInput [(ngModel)]="filtros.localizacao" placeholder="Digite a localização">
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Localização</mat-label>
+      <input matInput [(ngModel)]="filtros.localizacao">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Código CTC</mat-label>
+      <input matInput [(ngModel)]="filtros.codigo">
     </mat-form-field>
 
-    <mat-form-field class="full-width">
-        <mat-label>Status</mat-label>
-        <mat-select [(ngModel)]="filtros.status">
-            <mat-option value="PLANEJADA">Planejado</mat-option>
-          <mat-option value="EM_ANDAMENTO">Em andamento</mat-option>
-          <mat-option value="CONCLUIDA">Concluído</mat-option>
-        </mat-select>
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Status</mat-label>
+      <mat-select [(ngModel)]="filtros.status">
+        <mat-option value="">Todos</mat-option>
+        <mat-option value="PLANEJADA">Planejada</mat-option>
+        <mat-option value="ANDAMENTO">Em Andamento</mat-option>
+      </mat-select>
     </mat-form-field>
-</div>
+  </div>
 
-<div class="button-container">
-    <button mat-raised-button color="primary" (click)="buscar()">Buscar</button>
-    <button mat-raised-button color="warn" routerLink="/cadastro-centro-custo">Ir para Cadastro</button>
-</div>
+  <div class="buttons">
+    <button mat-raised-button class="consulta-btn" (click)="buscar()">Buscar</button>
+    <button mat-raised-button class="cadastrar-btn" routerLink="/cadastro-centro-custo">Ir para Cadastro</button>
+  </div>
 
-<mat-table [dataSource]="centrosCusto" class="mat-elevation-z8">
-    <ng-container matColumnDef="nome">
+  <div *ngIf="mostrarTabela">
+    <mat-table [dataSource]="centrosCusto" class="mat-elevation-z8">
+      <ng-container matColumnDef="nome">
         <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
         <mat-cell *matCellDef="let centro"> {{ centro.nome }} </mat-cell>
-    </ng-container>
+      </ng-container>
 
-    <ng-container matColumnDef="localizacao">
+      <ng-container matColumnDef="localizacao">
         <mat-header-cell *matHeaderCellDef> Localização </mat-header-cell>
         <mat-cell *matCellDef="let centro"> {{ centro.localizacao }} </mat-cell>
-    </ng-container>
+      </ng-container>
 
-    <ng-container matColumnDef="status">
+      <ng-container matColumnDef="status">
         <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
         <mat-cell *matCellDef="let centro"> {{ centro.status }} </mat-cell>
-    </ng-container>
+      </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
+      <ng-container matColumnDef="responsavel">
+        <mat-header-cell *matHeaderCellDef> Responsável </mat-header-cell>
+        <mat-cell *matCellDef="let centro"> {{ centro.responsavel }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="creaResponsavel">
+        <mat-header-cell *matHeaderCellDef> CREA Responsável </mat-header-cell>
+        <mat-cell *matCellDef="let centro"> {{ centro.creaResponsavel }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="valorTotal">
+        <mat-header-cell *matHeaderCellDef> Valor Total </mat-header-cell>
+        <mat-cell *matCellDef="let centro"> {{ centro.valorTotal | currency }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="valorEmExecucao">
+        <mat-header-cell *matHeaderCellDef> Valor em Execução </mat-header-cell>
+        <mat-cell *matCellDef="let centro"> {{ centro.valorEmExecucao | currency }} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['nome', 'localizacao', 'status', 'responsavel', 'creaResponsavel', 'valorTotal', 'valorEmExecucao']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['nome', 'localizacao', 'status', 'responsavel', 'creaResponsavel', 'valorTotal', 'valorEmExecucao'];"></mat-row>
+    </mat-table>
+  </div>
+</div>

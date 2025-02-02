@@ -1,38 +1,65 @@
-/* Estilo para a página de consulta de centro de custo */
-.container {
-    max-width: 900px;
-    margin: auto;
+.form-container {
     padding: 20px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-.grid-container {
+    border-radius: 13px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background: white;
+  }
+  
+  .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-bottom: 20px;
-}
-
-.full-width {
-    width: 100%;
-}
-
-.button-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .button-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .button-container button {
+    width: 120px;
+    height: 40px;
+    font-size: 14px;
+    border-radius: 6px;
+  }
+  
+  button.mat-primary {
+    background-color: #3b5998;
+    color: white;
+  }
+  
+  button.mat-accent {
+    background-color: #e63946;
+    color: white;
+  }
+  
+  .table-container {
     margin-top: 20px;
-}
-
-mat-table {
-    width: 100%;
-    margin-top: 20px;
+    padding: 15px;
     border-radius: 8px;
-    overflow: hidden;
-}
-
-mat-header-cell {
-    font-weight: bold;
-    background-color: #f1f1f1;
-}
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background: white;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  .consulta-btn {
+    background-color: #2D5F9A;
+    color: white;
+    border-radius: 8px;
+    padding: 10px 20px;
+  }
+  .cadastrar-btn {
+    background-color: #E94E77;
+    color: white;
+    border-radius: 8px;
+    padding: 10px 20px;
+  }
+  

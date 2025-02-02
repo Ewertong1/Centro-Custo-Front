@@ -1,42 +1,41 @@
-.form-container {
-    max-width: 900px;
-    margin: auto;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    background: #fff;
-  }
-  .title {
-    text-align: center;
-    font-size: 22px;
-    margin-bottom: 20px;
-  }
-  .grid-container {
-    display: flex;
-    gap: 20px;
-  }
-  .full-width {
-    width: 100%;
-  }
-  .half-width {
-    width: 48%;
-  }
-  .buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
-  }
-  .salvar-btn {
-    background-color: #2D5F9A;
-    color: white;
-    border-radius: 8px;
-    padding: 10px 20px;
-  }
-  .consulta-btn {
-    background-color: #E94E77;
-    color: white;
-    border-radius: 8px;
-    padding: 10px 20px;
-    border-color: #fff;
-  }
+ .form-container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      background: #fff;
+    }
+    .title {
+      text-align: center;
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    .grid-container {
+      display: flex;
+      gap: 20px;
+    }
+    .full-width {
+      width: 100%;
+    }
+    .half-width {
+      width: 48%;
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .salvar-btn {
+      background-color: #2D5F9A;
+      color: white;
+      border-radius: 8px;
+      padding: 10px 20px;
+    }
+    .consulta-btn {
+      background-color: #E94E77;
+      color: white;
+      border-radius: 8px;
+      padding: 10px 20px;
+    }

@@ -14,8 +14,10 @@ export class ConsultaCentroCustoComponent implements OnInit {
   filtros = {
     nome: '',
     localizacao: '',
-    status: ''
+    status: '',
+    codigo:''
   };
+  mostrarTabela = false;
 
   constructor(private centroCustoService: CentroCustoService) {}
 
@@ -38,6 +40,7 @@ export class ConsultaCentroCustoComponent implements OnInit {
     this.centroCustoService.filtrarCentroCusto(this.filtros).subscribe(
       (response) => {
         this.centrosCusto = response;
+        this.mostrarTabela = this.centrosCusto.length > 0; // Só exibe a tabela se houver itens
       },
       (error) => {
         console.error('Erro ao buscar centros de custo:', error);

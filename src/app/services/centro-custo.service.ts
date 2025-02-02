@@ -35,6 +35,7 @@ export class CentroCustoService {
     if (filtros.nome) params.append('nome', filtros.nome);
     if (filtros.localizacao) params.append('localizacao', filtros.localizacao);
     if (filtros.status) params.append('status', filtros.status);
+    if (filtros.codigo) params.append('codigo', filtros.codigo);
   
     return this.http.get<any[]>(`${this.apiUrl}/filtrar?${params.toString()}`, {
       headers: this.getHeaders()

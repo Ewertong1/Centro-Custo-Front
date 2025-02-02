@@ -34,6 +34,7 @@ export class CentroCustoComponent {
     this.centroCustoService.salvarCentroCusto(this.centroCusto).subscribe({
       next: (response) => {
         console.log('Centro de Custo salvo com sucesso:', response);
+        alert('Centro de Custo salvo com sucesso!');
         this.mensagemSucesso = 'Centro de Custo cadastrado com sucesso!';
         this.limparFormulario();
       },

@@ -7,6 +7,8 @@ import { CadastroUsuarioComponent } from './components/cadastro-usuario/cadastro
 import { ConsultaUsuarioComponent } from './components/consulta-usuario/consulta-usuario.component';
 import { CentroCustoComponent } from './centro-custo/cadastro-centro-custo/cadastro-centro-custo.component';
 import { ConsultaCentroCustoComponent } from './centro-custo/consulta-centro-custo/consulta-centro-custo.component';
+import { CadastroSuprimentosComponent } from './suprimentos/cadastro-suprimentos/cadastro-suprimentos.component';
+import { ConsultaSuprimentosComponent } from './suprimentos/consulta-suprimentos/consulta-suprimentos.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -15,6 +17,8 @@ const routes: Routes = [
   { path: 'consulta-usuario', component: ConsultaUsuarioComponent, canActivate: [AuthGuard] },
   { path: 'cadastro-centro-custo', component: CentroCustoComponent, canActivate: [AuthGuard]  }, 
   { path: 'consulta-centro-custo', component: ConsultaCentroCustoComponent, canActivate: [AuthGuard]  }, 
+  { path: 'cadastro-suprimentos', component: CadastroSuprimentosComponent, canActivate: [AuthGuard]  }, 
+  { path: 'consulta-suprimentos', component: ConsultaSuprimentosComponent, canActivate: [AuthGuard]  }, 
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' }
 ];
