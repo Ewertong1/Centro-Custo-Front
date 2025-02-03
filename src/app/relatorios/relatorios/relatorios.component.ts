@@ -16,7 +16,9 @@ export class RelatoriosComponent implements OnInit {
 
   constructor(private relatoriosService: RelatoriosService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.carregarRelatorio();
+  }
 
   carregarRelatorio() {
     if (this.tipoSelecionado === 'Sintético') {
