@@ -156,4 +156,5 @@ onPlanoContaChange(nivel: number, idPlanoConta: number) {
   irParaConsulta() {
     window.location.href = '/consulta-suprimentos';
   }
+  
 }

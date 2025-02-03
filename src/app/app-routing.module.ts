@@ -9,6 +9,7 @@ import { CentroCustoComponent } from './centro-custo/cadastro-centro-custo/cadas
 import { ConsultaCentroCustoComponent } from './centro-custo/consulta-centro-custo/consulta-centro-custo.component';
 import { CadastroSuprimentosComponent } from './suprimentos/cadastro-suprimentos/cadastro-suprimentos.component';
 import { ConsultaSuprimentosComponent } from './suprimentos/consulta-suprimentos/consulta-suprimentos.component';
+import { RelatoriosComponent } from './relatorios/relatorios/relatorios.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'consulta-centro-custo', component: ConsultaCentroCustoComponent, canActivate: [AuthGuard]  }, 
   { path: 'cadastro-suprimentos', component: CadastroSuprimentosComponent, canActivate: [AuthGuard]  }, 
   { path: 'consulta-suprimentos', component: ConsultaSuprimentosComponent, canActivate: [AuthGuard]  }, 
+  { path: 'relatorios', component: RelatoriosComponent, canActivate: [AuthGuard]  }, 
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' }
 ];

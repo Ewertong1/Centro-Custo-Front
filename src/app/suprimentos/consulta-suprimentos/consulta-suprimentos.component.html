@@ -1,1 +1,95 @@
-<p>consulta-suprimentos works!</p>
+<div class="container">
+    <h2 class="title">Consulta de Suprimentos</h2>
+  
+    <!-- Formulário de Filtros -->
+    <form [formGroup]="filtroForm" class="form-grid">
+      
+      <!-- Nome do Suprimento -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nome do Suprimento</mat-label>
+        <input matInput formControlName="nome">
+      </mat-form-field>
+  
+      <!-- Seleção de Agente -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Agente</mat-label>
+        <mat-select formControlName="idAgente">
+          <mat-option *ngFor="let agente of agentes" [value]="agente.idAgente">
+            {{ agente.nome }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <!-- Seleção de Centro de Custo -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Centro de Custo</mat-label>
+        <mat-select formControlName="idCentroCusto">
+          <mat-option *ngFor="let centro of centrosCusto" [value]="centro.idctocusto">
+            {{ centro.nome }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  
+    <!-- Botões -->
+    <div class="button-group">
+      <button mat-raised-button color="primary" (click)="consultarSuprimentos()">Consultar</button>
+      <button mat-raised-button color="warn" (click)="limparFiltros()">Limpar Filtros</button>
+    </div>
+  
+    <!-- Tabela de Resultados -->
+    <div *ngIf="suprimentos.length > 0" class="table-container">
+      <table mat-table [dataSource]="suprimentos" class="mat-elevation-z8">
+  
+        <!-- Coluna Nome do Suprimento -->
+        <ng-container matColumnDef="nomeSuprimento">
+          <th mat-header-cell *matHeaderCellDef> Nome do Suprimento </th>
+          <td mat-cell *matCellDef="let element"> {{ element.nomeSuprimento }} </td>
+        </ng-container>
+  
+        <!-- Coluna Nome do Agente -->
+        <ng-container matColumnDef="nomeAgente">
+          <th mat-header-cell *matHeaderCellDef> Agente </th>
+          <td mat-cell *matCellDef="let element"> {{ element.nomeAgente }} </td>
+        </ng-container>
+  
+        <!-- Coluna Quantidade -->
+        <ng-container matColumnDef="qtd">
+          <th mat-header-cell *matHeaderCellDef> Quantidade </th>
+          <td mat-cell *matCellDef="let element"> {{ element.qtd }} </td>
+        </ng-container>
+  
+        <!-- Coluna Preço Unitário -->
+        <ng-container matColumnDef="precoUnitario">
+          <th mat-header-cell *matHeaderCellDef> Preço Unitário </th>
+          <td mat-cell *matCellDef="let element"> {{ element.precoUnitario | currency:'BRL' }} </td>
+        </ng-container>
+  
+        <!-- Colunas dos Planos de Conta -->
+        <ng-container matColumnDef="descricaoPlanoNivel1">
+          <th mat-header-cell *matHeaderCellDef> Plano Nível 1 </th>
+          <td mat-cell *matCellDef="let element"> {{ element.descricaoPlanoNivel1 }} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="descricaoPlanoNivel2">
+          <th mat-header-cell *matHeaderCellDef> Plano Nível 2 </th>
+          <td mat-cell *matCellDef="let element"> {{ element.descricaoPlanoNivel2 }} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="descricaoPlanoNivel3">
+          <th mat-header-cell *matHeaderCellDef> Plano Nível 3 </th>
+          <td mat-cell *matCellDef="let element"> {{ element.descricaoPlanoNivel3 }} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="descricaoPlanoNivel4">
+          <th mat-header-cell *matHeaderCellDef> Plano Nível 4 </th>
+          <td mat-cell *matCellDef="let element"> {{ element.descricaoPlanoNivel4 }} </td>
+        </ng-container>
+  
+        <!-- Cabeçalho e Linha da Tabela -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+  

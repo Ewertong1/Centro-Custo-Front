@@ -26,6 +26,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SuprimentosModule } from './suprimentos/suprimentos.module';
+import { ConsultaSuprimentosComponent } from './suprimentos/consulta-suprimentos/consulta-suprimentos.component';
+import { RelatoriosComponent } from './relatorios/relatorios/relatorios.component';
 
 
 @NgModule({
@@ -33,7 +35,7 @@ import { SuprimentosModule } from './suprimentos/suprimentos.module';
         AppComponent,
         ConsultaUsuarioComponent,
         MenuComponent,
-        LoginComponent,CentroCustoComponent,ConsultaCentroCustoComponent
+        LoginComponent,CentroCustoComponent,ConsultaCentroCustoComponent,ConsultaSuprimentosComponent ,RelatoriosComponent
     ],
     bootstrap: [AppComponent],
     imports: [

@@ -52,4 +52,8 @@ export class SuprimentosService {
   salvar(suprimento: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/suprimentos`, suprimento, { headers: this.getHeaders() });
   }
+
+  consultarSuprimentos(filtros: { nome: string, idAgente: number, idCentroCusto: number }): Observable<any[]> {
+    return this.http.post<any[]>(`${this.apiUrl}/suprimentos/consulta`, filtros, { headers: this.getHeaders() });
+  }
 }
