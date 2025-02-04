@@ -1,35 +1,65 @@
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 200px;
-  height: 100%;
-  background-color: #333;
+.sidenav-container {
+  height: 100vh;
+}
+h2{
+  padding-left: 25%;
   color: white;
-  padding-top: 20px;
 }
 
-.sidebar h2 {
-  color: #ffffff;
-  text-align: center;
+.sidebar {
+  width: 250px; // Largura do menu expandido
+  transition: width 0.3s ease;
+  background-color: #1f2d3d;
+  height: 100vh;
+  overflow: hidden;
+
+  &.collapsed {
+    width: 70px; // Largura do menu recolhido
+  }
+
+  ul {
+    padding: 0;
+    list-style: none;
+    margin-top: 10px;
+
+    li {
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      color: white;
+      transition: background 0.3s;
+      position: relative;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      mat-icon {
+        margin-right: 15px;
+        min-width: 40px; // Mantém o ícone alinhado ao recolher
+        text-align: center;
+      }
+
+      span {
+        white-space: nowrap;
+        overflow: hidden;
+        transition: opacity 0.3s ease;
+      }
+    }
+  }
 }
 
-.sidebar ul {
-  list-style-type: none;
-  padding: 0;
+// Esconde apenas os textos quando o menu estiver recolhido, mas mantém os ícones visíveis
+.sidebar.collapsed ul li span {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  transition: width 0.3s ease, opacity 0.3s ease;
 }
 
-.sidebar ul li {
-  padding: 10px;
-  text-align: center;
+// Ajusta o alinhamento dos ícones para ficarem centralizados no modo recolhido
+.sidebar.collapsed ul li {
+  justify-content: center;
 }
 
-.sidebar ul li a {
-  color: #ffffff;
-  text-decoration: none;
-  display: block;
-}
-
-.sidebar ul li a:hover {
-  background-color: #575757;
-}

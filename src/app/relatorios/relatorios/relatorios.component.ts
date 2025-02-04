@@ -25,6 +25,7 @@ export class RelatoriosComponent implements OnInit {
       this.relatoriosService.obterRelatorioSintetico().subscribe(data => {
         this.relatorioDados = data;
         this.displayedColumns = ['descricao', 'totalMovimentado'];
+        
       });
     } else {
       this.relatoriosService.obterRelatorioAnalitico().subscribe(data => {

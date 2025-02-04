@@ -1,0 +1,43 @@
+<mat-dialog-content>
+    <h2>Cadastro de Agente</h2>
+    <form [formGroup]="cadastroAgenteForm">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="nome" placeholder="Digite o nome do agente">
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>CPF/CNPJ</mat-label>
+        <input matInput formControlName="cpfCnpj" placeholder="Digite o CPF ou CNPJ">
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Tipo de Pessoa</mat-label>
+        <mat-select formControlName="tipoPessoa">
+          <mat-option [value]="1">Física</mat-option>
+          <mat-option [value]="2">Jurídica</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Endereço</mat-label>
+        <input matInput formControlName="endereco" placeholder="Digite o endereço">
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>UF</mat-label>
+        <input matInput formControlName="uf" placeholder="Digite o estado">
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Inscrição Estadual</mat-label>
+        <input matInput formControlName="inscricaoEstadual" placeholder="Digite a inscrição estadual">
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+  
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="onSubmit()">Salvar</button>
+  </mat-dialog-actions>
+  

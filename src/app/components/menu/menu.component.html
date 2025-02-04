@@ -1,14 +1,65 @@
-<div class="sidebar">
-  <h2>Bem-vindo</h2>
-  <ul>
-   
-    <li ><a routerLink="/consulta-usuario">Consulta de Usuário</a></li>
-    <li ><a routerLink="/cadastro-usuario">Cadastro de Usuário</a></li>
-    <li ><a routerLink="/cadastro-centro-custo">Cadastro Centro de Custo</a></li>
-    <li ><a routerLink="/consulta-centro-custo">Cadastro Centro de Custo</a></li>
-    <li ><a routerLink="/cadastro-suprimentos">Cadastro Insumos</a></li>
-    <li ><a routerLink="/consulta-suprimentos">Consulta Insumos</a></li>
-    <li ><a routerLink="/relatorios">Relatórios</a></li>
-    <li><a (click)="logout()">Sair</a></li>
-  </ul>
-</div>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" opened>
+    <div class="sidebar">
+      <button style="color: #ffff;" mat-icon-button (click)="toggleSidenav()">
+        <mat-icon>{{ isExpanded ? 'menu_open' : 'menu' }}</mat-icon>
+      </button>
+      <h2 *ngIf="isExpanded">Bem-vindo</h2>
+      
+      <ul>
+        <!-- CONTROLE DE ACESSO COM SUBMENU -->
+        <li (click)="toggleSubMenu('controleAcesso')">
+          <mat-icon>security</mat-icon>
+          <span *ngIf="isExpanded">Controle de Acesso</span>
+          <mat-icon *ngIf="isExpanded">{{ submenus['controleAcesso'] ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </li>
+        <ul *ngIf="submenus['controleAcesso']">
+          <li><a routerLink="/cadastro-usuario"><mat-icon>person_add</mat-icon> Cadastro de Usuário</a></li>
+          <li><a routerLink="/consulta-usuario"><mat-icon>search</mat-icon> Consulta de Usuário</a></li>
+        </ul>
+
+        <!-- CENTRO DE CUSTO COM SUBMENU -->
+        <li (click)="toggleSubMenu('centroCusto')">
+          <mat-icon>account_balance</mat-icon> 
+          <span *ngIf="isExpanded">Centro de Custo</span>
+          <mat-icon *ngIf="isExpanded">{{ submenus['centroCusto'] ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </li>
+        <ul *ngIf="submenus['centroCusto']">
+
+          <li><a routerLink="/cadastro-centro-custo"><mat-icon>add</mat-icon> Cadastro Centro de Custo</a></li>
+          <li><a routerLink="/consulta-centro-custo"><mat-icon>search</mat-icon> Consulta Centro de Custo</a></li>
+
+        </ul>
+
+        <!-- SUPRIMENTOS COM SUBMENU -->
+        <li (click)="toggleSubMenu('suprimentos')">
+          <mat-icon>inventory</mat-icon> 
+          <span *ngIf="isExpanded">Suprimentos</span>
+          <mat-icon *ngIf="isExpanded">{{ submenus['suprimentos'] ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </li>
+        <ul *ngIf="submenus['suprimentos']">
+          <li><a routerLink="/cadastro-suprimentos"><mat-icon>add</mat-icon>Cadastro Insumos</a></li>
+          <li><a routerLink="/consulta-suprimentos"><mat-icon>search</mat-icon>Consulta Insumos</a></li>
+        </ul>
+
+        <!-- RELATÓRIOS -->
+        <li>
+          <a routerLink="/relatorios">
+            <mat-icon  style=" color: #ffff; ">bar_chart</mat-icon> <span style="font-size: 100%; color: #ffff; " *ngIf="isExpanded">Relatórios</span>
+          </a>
+        </li>
+
+        <!-- SAIR -->
+        <li>
+          <a (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon> <span *ngIf="isExpanded">Sair</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -24,10 +24,15 @@
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Agente</mat-label>
         <mat-select formControlName="agente">
-          <mat-option *ngFor="let agente of agentes" [value]="agente.idAgente">{{ agente.nome }}</mat-option>
+          <mat-option *ngFor="let agente of agentes" [value]="agente.idAgente">
+            {{ agente.nome }}
+          </mat-option>
+          <mat-divider></mat-divider>
+          <button mat-button color="primary" (click)="abrirModalCadastroAgente()">+ Adicionar</button>
         </mat-select>
       </mat-form-field>
-      <button mat-button color="primary">+ Adicionar</button>
+      
+      
     </div>
 
     <div class="row">
@@ -54,12 +59,19 @@
           <mat-option *ngFor="let unidade of unidadesMedida" [value]="unidade.idUnidademedida">{{ unidade.descricao }}</mat-option>
         </mat-select>
       </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Data de Pagamento</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dataInicio">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
     </div>
 
     <!-- Seção de Plano de Contas -->
    <!-- Plano de Contas - Nível 1 -->
 <!-- Plano de Contas - Nível 1 -->
 <!-- Plano de Contas - Nível 1 -->
+
 <mat-form-field appearance="outline" class="full-width">
   <mat-label>Plano de Contas - Nível 1</mat-label>
   <mat-select formControlName="planoContaNivel1" (selectionChange)="onPlanoContaChange(1, $event.value)">
@@ -102,18 +114,12 @@
 
     
     
+<div>
 
-    <div class="row">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Data de Início</mat-label>
-        <input matInput type="date" formControlName="dataInicio">
-      </mat-form-field>
 
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Data de Fim</mat-label>
-        <input matInput type="date" formControlName="dataFim">
-      </mat-form-field>
-    </div>
+
+
+</div>
 
     
     <div class="buttons">

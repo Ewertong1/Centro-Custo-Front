@@ -28,6 +28,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SuprimentosModule } from './suprimentos/suprimentos.module';
 import { ConsultaSuprimentosComponent } from './suprimentos/consulta-suprimentos/consulta-suprimentos.component';
 import { RelatoriosComponent } from './relatorios/relatorios/relatorios.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { CadastroAgenteModalComponent } from './components/cadastro-agente-modal/cadastro-agente-modal.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 @NgModule({
@@ -35,10 +39,13 @@ import { RelatoriosComponent } from './relatorios/relatorios/relatorios.componen
         AppComponent,
         ConsultaUsuarioComponent,
         MenuComponent,
-        LoginComponent,CentroCustoComponent,ConsultaCentroCustoComponent,ConsultaSuprimentosComponent ,RelatoriosComponent
+        LoginComponent,CentroCustoComponent,ConsultaCentroCustoComponent,ConsultaSuprimentosComponent ,RelatoriosComponent,CadastroAgenteModalComponent
     ],
     bootstrap: [AppComponent],
     imports: [
+        MatIconModule,
+        MatSidenavModule,
+        MatButtonModule,
         SuprimentosModule,
         BrowserModule,
         AppRoutingModule,
@@ -46,6 +53,7 @@ import { RelatoriosComponent } from './relatorios/relatorios/relatorios.componen
         NgxMaskModule.forRoot(),
         ReactiveFormsModule,
         CommonModule,
+        MatDividerModule,
         MatCardModule,
         MatTableModule,
         MatDatepickerModule,  // 💡 Necessário para o Datepicker
@@ -55,7 +63,7 @@ import { RelatoriosComponent } from './relatorios/relatorios/relatorios.componen
     MatSelectModule,      // 💡 Necessário se estiver usando mat-select,
 
     MatGridListModule,
-    MatButtonModule,
+   
     MatDialogModule
 
 

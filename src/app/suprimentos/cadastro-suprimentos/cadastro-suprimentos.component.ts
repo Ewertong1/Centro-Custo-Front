@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { CadastroAgenteModalComponent } from 'src/app/components/cadastro-agente-modal/cadastro-agente-modal.component';
 import { SuprimentosService } from 'src/app/services/suprimentos.service';
 
 @Component({
@@ -22,7 +24,7 @@ export class CadastroSuprimentosComponent implements OnInit {
   mostrarPlanoConta3 = false;
   mostrarPlanoConta4 = false;
 
-  constructor(private fb: FormBuilder, private suprimentosService: SuprimentosService) {}
+  constructor(private fb: FormBuilder, private suprimentosService: SuprimentosService,private dialog: MatDialog) {}
 
   ngOnInit() {
     this.suprimentoForm = this.fb.group({
@@ -61,6 +63,13 @@ export class CadastroSuprimentosComponent implements OnInit {
     });
   }
 
+  abrirModalCadastroAgente(): void {
+    this.dialog.open(CadastroAgenteModalComponent, {
+      width: '500px',
+      disableClose: true
+    });
+    this.suprimentosService.listarAgentes().subscribe(data => this.agentes = data);
+  }
   carregarPlanoConta(nivel: number, codigoBase: string) {
     if (nivel === 2) {
       this.mostrarPlanoConta2 = true;

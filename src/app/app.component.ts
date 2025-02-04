@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ChangeDetectorRef } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +9,19 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'cadastro-pessoas';
 
-
   isLoginPage: boolean = false;
 
-  constructor(private router: Router) {
-    this.router.events.subscribe(() => {
-      this.isLoginPage = this.router.url === '/login';
-    });}
-    ngOnInit(): void {}
+  constructor(private router: Router, private cdRef: ChangeDetectorRef) {
+     this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        setTimeout(() => {
+          this.isLoginPage = event.url === '/login';
+          console.log("URL atual:", event.url);
+          console.log("isLoginPage:", this.isLoginPage);
+          this.cdRef.detectChanges(); // Garante a atualização da UI
+        }, 0);
+      }
+    });
+    
+  }
 }

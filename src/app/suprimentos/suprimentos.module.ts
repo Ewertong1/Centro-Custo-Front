@@ -7,6 +7,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 @NgModule({
@@ -18,7 +21,10 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule, // Adicionado
     MatInputModule,     // Adicionado
     MatSelectModule,    // Adicionado
-    MatButtonModule     // Adicionado
+    MatButtonModule ,    // Adicionado
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatDividerModule
   ]
 })
 export class SuprimentosModule { }

@@ -18,7 +18,7 @@ export interface Usuario {
 export class UsuarioService {
   
   private apiUrl = 'http://localhost:8080/api/auth/register';
-  private apiCon = 'http://localhost:8080/api/auth';
+  private apiCon = 'http://localhost:8080/api';
   constructor(private http: HttpClient,private authService: AuthService) {}
 
   
@@ -32,13 +32,13 @@ export class UsuarioService {
     if (nome) params = params.set('nome', nome);
     if (cpf) params = params.set('cpf', cpf);
   
-    return this.http.get<Usuario[]>(`${this.apiCon}/usuarios`, {headers, params });
+    return this.http.get<Usuario[]>(`${this.apiCon}/usuario`, {headers, params });
   }
   excluirUsuario(id: number): Observable<void> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    return this.http.delete<void>(`${this.apiCon}/usuarios/${id}`, { headers });
+    return this.http.delete<void>(`${this.apiCon}/usuario/${id}`, { headers });
 }
 
   
