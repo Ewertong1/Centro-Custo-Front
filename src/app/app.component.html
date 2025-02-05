@@ -1,5 +1,5 @@
 <!-- <app-menu *ngIf="!isLoginPage"></app-menu>Revisa logica--> 
-<app-menu ></app-menu>
+<app-menu *ngIf="!isLoginPage"></app-menu>
 <div class="main-content">
   <router-outlet></router-outlet>
 </div>

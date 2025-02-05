@@ -1,5 +1,6 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { MenuComponent } from './components/menu/menu.component';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ export class AppComponent {
         setTimeout(() => {
           this.isLoginPage = event.url === '/login';
           console.log("URL atual:", event.url);
-          console.log("isLoginPage:", this.isLoginPage);
+         // console.log("isLoginPage:", this.isLoginPage);
           this.cdRef.detectChanges(); // Garante a atualização da UI
         }, 0);
       }
