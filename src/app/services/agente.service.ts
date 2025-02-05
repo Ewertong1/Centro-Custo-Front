@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root' // Torna o serviço acessível globalmente
 })
 export class AgenteService {
-  private apiUrl = 'http://localhost:8080/api';
+  private apiUrl = 'http://api-back:8080/api';
 
   constructor(private http: HttpClient) {}
 

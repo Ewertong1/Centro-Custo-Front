@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RelatoriosService {
-  private apiUrl = 'http://localhost:8080/api/relatorios';
+  private apiUrl = 'http://api-back:8080/api/relatorios';
 
   constructor(private http: HttpClient) {}
 

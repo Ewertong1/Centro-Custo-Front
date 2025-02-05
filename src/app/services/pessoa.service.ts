@@ -18,7 +18,7 @@ export interface Pessoa {
 export class PessoaService {
 
   private apiUrl = '/api/pessoas';
-  private baseUrl = 'http://localhost:8080/api'; 
+  private baseUrl = 'http://api-back:8080/api'; 
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
