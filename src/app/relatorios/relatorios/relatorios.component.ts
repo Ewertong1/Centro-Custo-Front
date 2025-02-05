@@ -45,21 +45,35 @@ export class RelatoriosComponent implements OnInit {
 
   gerarPDF() {
     const doc = new jsPDF();
-    const colunas = this.displayedColumns.map(col => this.displayedColumnTitles[col]);
+    
+    // Caminho da imagem no projeto
+    const logoPath = '../../../assets/img/LOGOA2PNG.png';
 
-    const dadosTabela = this.relatorioDados.map(item => 
-      this.displayedColumns.map(col => col === 'totalMovimentado' 
-        ? new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item[col]) 
-        : item[col])
-    );
+    // Criando a imagem no topo
+    const img = new Image();
+    img.src = logoPath;
 
-    doc.text('Relatório de Centro de Custo', 10, 10);
-    autoTable(doc, {
-      head: [colunas],
-      body: dadosTabela,
-      startY: 20
-    });
+    img.onload = () => {
+      doc.addImage(img, 'PNG', 10, 10, 40, 20); // (imagem, tipo, x, y, largura, altura)
+      doc.setFontSize(16);
+      doc.text('Relatório de Centro de Custo', 60, 20); // Adicionando título ao lado do logo
 
-    doc.save('RelatorioCentroCusto.pdf');
+      // Criando a tabela
+      const colunas = this.displayedColumns.map(col => this.displayedColumnTitles[col]);
+
+      const dadosTabela = this.relatorioDados.map(item =>
+        this.displayedColumns.map(col => col === 'totalMovimentado' 
+          ? new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item[col]) 
+          : item[col])
+      );
+
+      autoTable(doc, {
+        head: [colunas],
+        body: dadosTabela,
+        startY: 40
+      });
+
+      doc.save('RelatorioCentroCusto.pdf');
+    };
   }
 }
