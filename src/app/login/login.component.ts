@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {console.log('LoginComponent carregado!');}
 
   onSubmit(): void {
     if (this.loginForm.valid) {

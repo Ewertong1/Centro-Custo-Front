@@ -1,5 +1,9 @@
-<!-- <app-menu *ngIf="!isLoginPage"></app-menu>Revisa logica--> 
-<app-menu *ngIf="!isLoginPage"></app-menu>
-<div class="main-content">
-  <router-outlet></router-outlet>
-</div>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" opened *ngIf="showMenu">
+    <app-menu></app-menu>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
