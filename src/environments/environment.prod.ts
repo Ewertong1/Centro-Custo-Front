@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://api-back:8080/api'
+  apiUrl: 'http://santaizabel.net.br:8080/api'
 };

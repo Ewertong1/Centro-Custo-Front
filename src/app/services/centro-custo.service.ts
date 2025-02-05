@@ -7,7 +7,7 @@ import { CentroCusto } from '../centro-custo/cadastro-centro-custo/cadastro-cent
   providedIn: 'root'
 })
 export class CentroCustoService {
-  private apiUrl = 'http://api-back:8080/api/centro-custo'; // Ajuste conforme necessário
+  private apiUrl = 'http://santaizabel.net.br:8080/api/centro-custo'; // Ajuste conforme necessário
 
   constructor(private http: HttpClient) {}
 
