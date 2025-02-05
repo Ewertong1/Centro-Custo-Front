@@ -13,6 +13,8 @@ export class RelatoriosComponent implements OnInit {
   tipoSelecionado: string = 'Sintético';
   relatorioDados: any[] = [];
   displayedColumns: string[] = [];
+  displayedColumnTitles: { [key: string]: string } = {}; // Declaração correta
+
 
   constructor(private relatoriosService: RelatoriosService) {}
 
@@ -22,18 +24,26 @@ export class RelatoriosComponent implements OnInit {
 
   carregarRelatorio() {
     if (this.tipoSelecionado === 'Sintético') {
-      this.relatoriosService.obterRelatorioSintetico().subscribe(data => {
-        this.relatorioDados = data;
-        this.displayedColumns = ['descricao', 'totalMovimentado'];
-        
-      });
+        this.relatoriosService.obterRelatorioSintetico().subscribe(data => {
+            this.relatorioDados = data;
+            this.displayedColumns = ['descricao', 'totalMovimentado'];
+            this.displayedColumnTitles = { descricao: 'Descrição', totalMovimentado: 'Total Apurado' };
+        });
     } else {
-      this.relatoriosService.obterRelatorioAnalitico().subscribe(data => {
-        this.relatorioDados = data;
-        this.displayedColumns = ['descricaoNivel1', 'descricaoNivel2', 'descricaoNivel3', 'descricaoNivel4', 'totalMovimentado'];
-      });
+        this.relatoriosService.obterRelatorioAnalitico().subscribe(data => {
+            this.relatorioDados = data;
+            this.displayedColumns = ['descricaoNivel1', 'descricaoNivel2', 'descricaoNivel3', 'descricaoNivel4', 'totalMovimentado'];
+            this.displayedColumnTitles = {
+                descricaoNivel1: 'Nível 1',
+                descricaoNivel2: 'Nível 2',
+                descricaoNivel3: 'Nível 3',
+                descricaoNivel4: 'Nível 4',
+                totalMovimentado: 'Total Apurado'
+            };
+        });
     }
-  }
+}
+
 
   gerarPDF() {
     const doc = new jsPDF();
