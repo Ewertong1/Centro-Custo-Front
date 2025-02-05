@@ -15,7 +15,7 @@ FROM nginx:alpine AS production-stage
 COPY --from=build-stage /app/dist/cadastro-pessoas/browser /usr/share/nginx/html
 
 # Copia a configuração correta para a pasta de conf.d
-COPY default.conf /etc/nginx/conf.d/default.conf
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # Expõe a porta 80
 EXPOSE 80
