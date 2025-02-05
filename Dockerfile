@@ -12,7 +12,7 @@ RUN npm run build --configuration=production
 FROM nginx:alpine AS production-stage
 
 # Copia os arquivos do Angular para o diretório padrão do Nginx
-COPY --from=build-stage /app/dist/cadastro-pessoas /usr/share/nginx/html
+COPY --from=build-stage /app/dist/cadastro-pessoas/browser /usr/share/nginx/html
 
 # Copia a configuração correta para a pasta de conf.d
 COPY default.conf /etc/nginx/conf.d/default.conf
