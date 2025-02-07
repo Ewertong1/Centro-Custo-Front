@@ -41,5 +41,9 @@ export class CentroCustoService {
       headers: this.getHeaders()
     });
   }
-  
+  excluirCentroCusto(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, {
+      headers: this.getHeaders()
+    });
+  }
 }

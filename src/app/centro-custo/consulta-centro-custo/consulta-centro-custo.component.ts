@@ -47,4 +47,19 @@ export class ConsultaCentroCustoComponent implements OnInit {
       }
     );
   }
+
+  excluirCentroCusto(id: number): void {
+    if (confirm('Tem certeza que deseja excluir este centro de custo?')) {
+      this.centroCustoService.excluirCentroCusto(id).subscribe(
+        () => {
+          this.centrosCusto = this.centrosCusto.filter(centro => centro.id !== id);
+          console.log('Centro de custo excluído com sucesso.');
+        },
+        error => {
+          console.error('Erro ao excluir centro de custo:', error);
+        }
+      );
+    }
+  }
+  
 }

@@ -71,9 +71,18 @@
         <mat-header-cell *matHeaderCellDef> Valor em Execução </mat-header-cell>
         <mat-cell *matCellDef="let centro"> {{ centro.valorEmExecucao | currency }} </mat-cell>
       </ng-container>
+      <ng-container matColumnDef="acoes">
+        <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
+        <mat-cell *matCellDef="let centro">
+          <button mat-icon-button color="warn" (click)="excluirCentroCusto(centro.idctocusto)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+      
+      <mat-header-row *matHeaderRowDef="['nome', 'localizacao', 'status', 'responsavel', 'creaResponsavel', 'valorTotal', 'valorEmExecucao', 'acoes']"></mat-header-row>
+<mat-row *matRowDef="let row; columns: ['nome', 'localizacao', 'status', 'responsavel', 'creaResponsavel', 'valorTotal', 'valorEmExecucao', 'acoes'];"></mat-row>
 
-      <mat-header-row *matHeaderRowDef="['nome', 'localizacao', 'status', 'responsavel', 'creaResponsavel', 'valorTotal', 'valorEmExecucao']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['nome', 'localizacao', 'status', 'responsavel', 'creaResponsavel', 'valorTotal', 'valorEmExecucao'];"></mat-row>
     </mat-table>
   </div>
 </div>
