@@ -19,16 +19,16 @@
           {{ element[column] }}
         </ng-template>
       </td>
-      <!--
+      
       <td mat-footer-cell *matFooterCellDef [hidden]="column !== 'totalMovimentado'" class="text-right">
         <strong>{{ getTotalMovimentado() | currency:'BRL':'symbol':'1.2-2' }}</strong>
-      </td>-->
+      </td>
     </ng-container>
     
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-   <!--<tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>--> 
+   <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
   </table>
   
 
