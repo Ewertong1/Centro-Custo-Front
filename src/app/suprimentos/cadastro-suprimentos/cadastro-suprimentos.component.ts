@@ -40,7 +40,8 @@ export class CadastroSuprimentosComponent implements OnInit {
       planoContaNivel3: [''],
       planoContaNivel4: [''],
       dataInicio: ['', Validators.required],
-      dataFim: ['']
+      dataFim: [''],
+      custoAdmin: [false]
     });
     
 
@@ -121,7 +122,8 @@ export class CadastroSuprimentosComponent implements OnInit {
           planoContaNivel2: formValue.planoContaNivel2 || null,
           planoContaNivel3: formValue.planoContaNivel3 || null,
           planoContaNivel4: formValue.planoContaNivel4 || null,
-          status: formValue.status || null
+          status: formValue.status || null,
+          custoAdmin: formValue.custoAdmin ? 1 : 0
         };
         
 

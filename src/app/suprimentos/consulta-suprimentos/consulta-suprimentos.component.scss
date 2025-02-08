@@ -1,6 +1,6 @@
 .container {
     width: 90%;
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 20px auto;
     background: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
@@ -43,10 +43,10 @@
   }
   
   th {
-    background-color: #007bff;
+    background-color: #3c4e57 !important;
     color: white;
     padding: 8px;
-    text-align: left;
+    text-align: center;
   }
   
   td {
@@ -55,6 +55,6 @@
   }
   
   tr:hover {
-    background-color: rgba(0, 123, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
   }
   

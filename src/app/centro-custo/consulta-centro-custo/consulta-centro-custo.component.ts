@@ -61,5 +61,17 @@ export class ConsultaCentroCustoComponent implements OnInit {
       );
     }
   }
+
+  limparFiltros() {
+    this.filtros = {
+      nome: '',
+      localizacao: '',
+      status: '',
+      codigo: ''
+    };
+    this.centrosCusto = [];
+
+    this.ngOnInit() ;
+  }
   
 }

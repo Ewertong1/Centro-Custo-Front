@@ -33,6 +33,7 @@
   <div class="buttons">
     <button mat-raised-button class="consulta-btn" (click)="buscar()">Buscar</button>
     <button mat-raised-button class="cadastrar-btn" routerLink="/cadastro-centro-custo">Ir para Cadastro</button>
+    <button mat-raised-button color="warn" (click)="limparFiltros()">Limpar Filtros</button>
   </div>
 
   <div *ngIf="mostrarTabela">
