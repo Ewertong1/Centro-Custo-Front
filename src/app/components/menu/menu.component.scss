@@ -1,20 +1,20 @@
 .sidenav-container {
   height: 100vh;
-  display: flex;
+}
+h2{
+  padding-left: 25%;
+  color: white;
 }
 
-/* Define a largura do menu principal */
 .sidebar {
-  width: 250px; // Largura expandida
+  width: 250px; // Largura do menu expandido
   transition: width 0.3s ease;
   background-color: #1f2d3d;
   height: 100vh;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
 
   &.collapsed {
-    width: 70px; // Largura recolhida
+    width: 70px; // Largura do menu recolhido
   }
 
   ul {
@@ -30,7 +30,7 @@
       color: white;
       transition: background 0.3s;
       position: relative;
-      
+
       &:hover {
         background: rgba(255, 255, 255, 0.1);
       }
@@ -50,7 +50,7 @@
   }
 }
 
-/* Quando o menu estiver recolhido, esconde os textos dos submenus */
+// Esconde apenas os textos quando o menu estiver recolhido, mas mantém os ícones visíveis
 .sidebar.collapsed ul li span {
   opacity: 0;
   width: 0;
@@ -58,46 +58,9 @@
   transition: width 0.3s ease, opacity 0.3s ease;
 }
 
-/* Centraliza os ícones no modo recolhido */
+// Ajusta o alinhamento dos ícones para ficarem centralizados no modo recolhido
 .sidebar.collapsed ul li {
   justify-content: center;
 }
 
-/* Ajuste para telas menores (smartphones e tablets) */
-@media screen and (max-width: 768px) {
-  .sidebar {
-    width: 70px; // Mantém o menu recolhido no mobile
-  }
-
-  /* Esconde APENAS os textos dos submenus no mobile */
-  .sidebar ul li span {
-    display: none;
-  }
-
-  /* Mantém os ícones visíveis */
-  .sidebar ul li mat-icon {
-    margin-right: 0;
-    text-align: center;
-    width: 100%;
-  }
-
-  /* Ajusta o submenu quando expandido */
-  .sidebar.expanded {
-    width: 250px;
-  }
-
-  .sidebar.expanded ul li span {
-    display: inline; // Reaparece quando o menu é expandido
-  }
-
-  /* Ajusta o conteúdo principal para ocupar o espaço corretamente */
-  .content {
-    margin-left: 70px;
-    transition: margin-left 0.3s ease;
-  }
-
-  .sidebar.expanded ~ .content {
-    margin-left: 250px;
-  }
-}
 
