@@ -41,21 +41,7 @@
       
     </div>
   
-      <div class="grid-container">
-        <mat-form-field appearance="outline" class="half-width">
-          <mat-label>Data de Início</mat-label>
-          <input matInput [matDatepicker]="pickerInicio" [(ngModel)]="centroCusto.dataInicio" name="dataInicio">
-          <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
-          <mat-datepicker #pickerInicio></mat-datepicker>
-        </mat-form-field>
-  
-        <mat-form-field appearance="outline" class="half-width">
-          <mat-label>Data Prevista para Entrega</mat-label>
-          <input matInput [matDatepicker]="pickerEntrega" [(ngModel)]="centroCusto.dataPrevistaEntrega" name="dataEntrega">
-          <mat-datepicker-toggle matSuffix [for]="pickerEntrega"></mat-datepicker-toggle>
-          <mat-datepicker #pickerEntrega></mat-datepicker>
-        </mat-form-field>
-      </div>
+    
   <div class="grid-container">
       <mat-form-field appearance="outline" class="half-width">
         <mat-label>Status</mat-label>
@@ -69,6 +55,21 @@
       <mat-form-field appearance="outline" class="half-width">
         <mat-label>Código CTC</mat-label>
         <input matInput placeholder="Digite o Código" [(ngModel)]="centroCusto.codigo" name="crea">
+      </mat-form-field>
+    </div>
+    <div class="grid-container">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Data de Início</mat-label>
+        <input matInput [matDatepicker]="pickerInicio" [(ngModel)]="centroCusto.dataInicio" name="dataInicio">
+        <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+        <mat-datepicker #pickerInicio></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Data Prevista para Entrega</mat-label>
+        <input matInput [matDatepicker]="pickerEntrega" [(ngModel)]="centroCusto.dataPrevistaEntrega" name="dataEntrega">
+        <mat-datepicker-toggle matSuffix [for]="pickerEntrega"></mat-datepicker-toggle>
+        <mat-datepicker #pickerEntrega></mat-datepicker>
       </mat-form-field>
     </div>
   

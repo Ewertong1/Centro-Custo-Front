@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-menu',
-  templateUrl: '././menu.component.html',
-  styleUrls: ['././menu.component.scss']
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent {
-  isExpanded = true;
+export class MenuComponent implements OnInit {
+  isExpanded = true;  // O menu começa expandido apenas no desktop
+  isMobile = false;   // Flag para indicar se está no mobile
   
-  // Definição correta com índice de string para evitar erro de tipagem
   submenus: { [key: string]: boolean } = {
     controleAcesso: false,
     centroCusto: false,
@@ -18,19 +18,27 @@ export class MenuComponent {
 
   constructor(private authService: AuthService) {}
 
-  toggleSidenav(): void {
-    this.isExpanded = !this.isExpanded;
-    const sidebar = document.querySelector('.sidebar') as HTMLElement;
-    if (this.isExpanded) {
-      sidebar.classList.remove('collapsed');
-    } else {
-      sidebar.classList.add('collapsed');
+  ngOnInit(): void {
+    this.checkScreenSize(); // Verifica o tamanho da tela ao iniciar
+  }
+
+  // Listener para detectar mudanças no tamanho da tela
+  @HostListener('window:resize', [])
+  checkScreenSize(): void {
+    this.isMobile = window.innerWidth < 768; // Se for menor que 768px, é mobile
+    if (this.isMobile) {
+      this.isExpanded = false; // Mantém o menu fechado no mobile
     }
   }
-  
-  
 
-  toggleSubMenu(menu: string) {
+  toggleSidenav(): void {
+    if (!this.isMobile) { // No mobile, o menu nunca expande
+      this.isExpanded = !this.isExpanded;
+    }
+  }
+
+  toggleSubMenu(menu: string): void {
+    // Permite abrir os submenus normalmente no mobile e desktop
     this.submenus[menu] = !this.submenus[menu];
   }
 
