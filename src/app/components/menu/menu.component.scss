@@ -1,20 +1,16 @@
-.sidenav-container {
-  height: 100vh;
-}
-h2{
-  padding-left: 25%;
-  color: white;
-}
-
 .sidebar {
-  width: 250px; // Largura do menu expandido
+  width: 250px; // Menu expandido
   transition: width 0.3s ease;
   background-color: #1f2d3d;
   height: 100vh;
   overflow: hidden;
 
   &.collapsed {
-    width: 70px; // Largura do menu recolhido
+    width: 70px; // Menu recolhido
+  }
+  .bem{
+    color: white;
+   margin-left: 25%;
   }
 
   ul {
@@ -37,30 +33,50 @@ h2{
 
       mat-icon {
         margin-right: 15px;
-        min-width: 40px; // Mantém o ícone alinhado ao recolher
+        min-width: 40px;
         text-align: center;
       }
 
       span {
         white-space: nowrap;
         overflow: hidden;
-        transition: opacity 0.3s ease;
+        transition: opacity 0.3s ease, width 0.3s ease;
       }
     }
   }
 }
 
-// Esconde apenas os textos quando o menu estiver recolhido, mas mantém os ícones visíveis
+// 🔹 Quando o menu estiver recolhido, esconde as descrições
 .sidebar.collapsed ul li span {
   opacity: 0;
   width: 0;
   overflow: hidden;
-  transition: width 0.3s ease, opacity 0.3s ease;
+  display: none !important;
 }
 
-// Ajusta o alinhamento dos ícones para ficarem centralizados no modo recolhido
+// 🔹 Ajusta a posição dos ícones para centralizar no modo recolhido
 .sidebar.collapsed ul li {
   justify-content: center;
 }
 
+@media (max-width: 768px) {
+  .sidebar {
+    width: 70px;
+  }
+  .sidebar ul li span {
+    display: none;
+  }
+  .sidebar ul li {
+    justify-content: center;
+  }
+  // 🔹
+  .sidebar ul li span {
+    display: none;
+  }    
+  //faço o mesmo ajuste ou melhor para dispositivos menores
+  .sidebar.collapsed ul li span {
+    display: none;
+  }
+  
+}
 

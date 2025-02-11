@@ -22,6 +22,7 @@ export class RelatoriosComponent implements OnInit {
     this.carregarRelatorio();
   }
   
+//preciso que adicione como o footer o valor total de movimentado junto com o total
 
   carregarRelatorio() {
     if (this.tipoSelecionado === 'Sintético') {

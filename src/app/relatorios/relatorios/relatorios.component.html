@@ -18,11 +18,11 @@
         <ng-template #defaultColumn>
           {{ element[column] }}
         </ng-template>
+      </td> 
+      <td mat-footer-cell *matFooterCellDef [hidden]="column !== 'totalMovimentado'" class="text-right">
+        <strong>Valor Total: {{ getTotalMovimentado() | currency:'BRL':'symbol':'1.2-2' }}</strong>
       </td>
       
-      <td mat-footer-cell *matFooterCellDef [hidden]="column !== 'totalMovimentado'" class="text-right">
-        <strong>{{ getTotalMovimentado() | currency:'BRL':'symbol':'1.2-2' }}</strong>
-      </td>
     </ng-container>
     
   

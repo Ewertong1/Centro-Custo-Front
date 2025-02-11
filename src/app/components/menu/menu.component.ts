@@ -1,25 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-menu',
-  templateUrl: '././menu.component.html',
-  styleUrls: ['././menu.component.scss']
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent {
-  isExpanded = true;
-  
-  // Definição correta com índice de string para evitar erro de tipagem
+  isExpanded!: boolean;
+  isMobile!: boolean;
+
   submenus: { [key: string]: boolean } = {
     controleAcesso: false,
     centroCusto: false,
     suprimentos: false
   };
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {
+    this.checkScreenSize();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.checkScreenSize();
+  }
+
+  checkScreenSize(): void {
+    this.isMobile = window.innerWidth <= 768;
+    this.isExpanded = !this.isMobile; // No mobile, inicia fechado. No desktop, inicia aberto.
+  }
 
   toggleSidenav(): void {
     this.isExpanded = !this.isExpanded;
+  
     const sidebar = document.querySelector('.sidebar') as HTMLElement;
     if (this.isExpanded) {
       sidebar.classList.remove('collapsed');
@@ -28,9 +41,8 @@ export class MenuComponent {
     }
   }
   
-  
 
-  toggleSubMenu(menu: string) {
+  toggleSubMenu(menu: string): void {
     this.submenus[menu] = !this.submenus[menu];
   }
 

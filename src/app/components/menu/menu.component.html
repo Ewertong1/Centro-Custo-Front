@@ -1,16 +1,17 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="side" opened>
     <div class="sidebar">
-      <button style="color: #ffff;" mat-icon-button (click)="toggleSidenav()">
+      <button style="color: #ffff; " mat-icon-button (click)="toggleSidenav()">
         <mat-icon>{{ isExpanded ? 'menu_open' : 'menu' }}</mat-icon>
       </button>
-      <h2 *ngIf="isExpanded">Bem-vindo</h2>
+      <h2 class="bem" *ngIf="isExpanded">Bem-vindo</h2>
+
       
       <ul>
         <!-- CONTROLE DE ACESSO COM SUBMENU -->
         <li (click)="toggleSubMenu('controleAcesso')">
           <mat-icon>security</mat-icon>
-          <span *ngIf="isExpanded">Controle de Acesso</span>
+          <span *ngIf="isExpanded || !isMobile">Controle de Acesso</span>
           <mat-icon *ngIf="isExpanded">{{ submenus['controleAcesso'] ? 'expand_less' : 'expand_more' }}</mat-icon>
         </li>
         <ul *ngIf="submenus['controleAcesso']">
@@ -21,7 +22,7 @@
         <!-- CENTRO DE CUSTO COM SUBMENU -->
         <li (click)="toggleSubMenu('centroCusto')">
           <mat-icon>account_balance</mat-icon> 
-          <span *ngIf="isExpanded">Centro de Custo</span>
+          <span *ngIf="isExpanded && !isMobile">Controle de Acesso</span>
           <mat-icon *ngIf="isExpanded">{{ submenus['centroCusto'] ? 'expand_less' : 'expand_more' }}</mat-icon>
         </li>
         <ul *ngIf="submenus['centroCusto']">
