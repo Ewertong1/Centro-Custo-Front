@@ -83,12 +83,21 @@ export class CadastroSuprimentosComponent implements OnInit {
   }
 
   abrirModalCadastroAgente(): void {
-    this.dialog.open(CadastroAgenteModalComponent, {
+    const dialogRef = this.dialog.open(CadastroAgenteModalComponent, {
       width: '500px',
       disableClose: true
     });
-    this.suprimentosService.listarAgentes().subscribe(data => this.agentes = data);
+  
+    // Aguarda o fechamento do modal antes de recarregar a lista de agentes
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) { // Apenas recarrega se o usuário realmente cadastrou um novo agente
+        this.suprimentosService.listarAgentes().subscribe(data => {
+          this.agentes = data;
+        });
+      }
+    });
   }
+  
   carregarPlanoConta(nivel: number, codigoBase: string) {
     if (nivel === 2) {
       this.mostrarPlanoConta2 = true;

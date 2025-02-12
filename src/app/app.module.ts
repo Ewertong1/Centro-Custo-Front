@@ -32,7 +32,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { CadastroAgenteModalComponent } from './components/cadastro-agente-modal/cadastro-agente-modal.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 
+registerLocaleData(localePt);
 
 @NgModule({
     declarations: [
@@ -70,6 +74,6 @@ import { MatDividerModule } from '@angular/material/divider';
     ],
     providers: [provideHttpClient(withInterceptorsFromDi()),
         provideAnimationsAsync(),
-        provideAnimationsAsync()]
+        provideAnimationsAsync(),{ provide: LOCALE_ID, useValue: 'pt-BR' }]
 })
 export class AppModule { }
