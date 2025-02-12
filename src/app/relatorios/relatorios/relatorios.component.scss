@@ -36,3 +36,22 @@
     white-space: nowrap;
     align-items: center;
   }
+
+  .table-container {
+    width: 100%;
+    overflow-x: auto; // Permite o scroll horizontal no mobile
+    -webkit-overflow-scrolling: touch; // Melhora a rolagem em dispositivos iOS
+  
+    table {
+      min-width: 600px; // Define um tamanho mínimo maior que a tela para ativar o scroll
+      border-collapse: collapse;
+      width: 100%;
+    }
+  
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+  }
+  

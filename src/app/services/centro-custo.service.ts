@@ -46,4 +46,8 @@ export class CentroCustoService {
       headers: this.getHeaders()
     });
   }
+  buscarPorId(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
+  }
+  
 }

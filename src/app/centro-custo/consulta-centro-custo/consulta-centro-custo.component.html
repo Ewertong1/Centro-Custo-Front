@@ -72,9 +72,13 @@
         <mat-header-cell *matHeaderCellDef> Valor em Execução </mat-header-cell>
         <mat-cell *matCellDef="let centro"> {{ centro.valorEmExecucao | currency }} </mat-cell>
       </ng-container>
+      
       <ng-container matColumnDef="acoes">
         <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
         <mat-cell *matCellDef="let centro">
+          <button mat-icon-button color="primary" [routerLink]="['/cadastro-suprimentos', centro.idctocusto]">
+            <mat-icon>add</mat-icon>
+          </button>
           <button mat-icon-button color="warn" (click)="excluirCentroCusto(centro.idctocusto)">
             <mat-icon>delete</mat-icon>
           </button>

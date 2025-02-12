@@ -7,7 +7,7 @@
       <mat-option *ngFor="let tipo of tiposRelatorio" [value]="tipo">{{ tipo }}</mat-option>
     </mat-select>
   </mat-form-field>
-
+  <div class="table-container">
   <table mat-table [dataSource]="relatorioDados" class="mat-elevation-z8" *ngIf="relatorioDados.length > 0">
     <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
       <th mat-header-cell *matHeaderCellDef>{{ displayedColumnTitles[column] }}</th>
@@ -30,7 +30,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
   </table>
-  
+</div>
 
   <button mat-button color="primary" (click)="gerarPDF()" *ngIf="relatorioDados.length > 0">
     Exportar PDF

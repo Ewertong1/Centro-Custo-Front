@@ -15,32 +15,32 @@
           <mat-icon *ngIf="isExpanded">{{ submenus['controleAcesso'] ? 'expand_less' : 'expand_more' }}</mat-icon>
         </li>
         <ul *ngIf="submenus['controleAcesso']">
-          <li><a routerLink="/cadastro-usuario"><mat-icon>person_add</mat-icon> Cadastro de Usuário</a></li>
-          <li><a routerLink="/consulta-usuario"><mat-icon>search</mat-icon> Consulta de Usuário</a></li>
+          <li><a routerLink="/cadastro-usuario"><mat-icon>person_add</mat-icon> Cadastro</a></li>
+          <li><a routerLink="/consulta-usuario"><mat-icon>search</mat-icon> Consulta</a></li>
         </ul>
 
         <!-- CENTRO DE CUSTO COM SUBMENU -->
         <li (click)="toggleSubMenu('centroCusto')">
           <mat-icon>account_balance</mat-icon> 
-          <span *ngIf="isExpanded && !isMobile">Controle de Acesso</span>
+          <span *ngIf="isExpanded && !isMobile">Centro de Custo</span>
           <mat-icon *ngIf="isExpanded">{{ submenus['centroCusto'] ? 'expand_less' : 'expand_more' }}</mat-icon>
         </li>
         <ul *ngIf="submenus['centroCusto']">
 
-          <li><a routerLink="/cadastro-centro-custo"><mat-icon>add</mat-icon> Cadastro Centro de Custo</a></li>
-          <li><a routerLink="/consulta-centro-custo"><mat-icon>search</mat-icon> Consulta Centro de Custo</a></li>
+          <li><a routerLink="/cadastro-centro-custo"><mat-icon>add</mat-icon> Cadastro</a></li>
+          <li><a routerLink="/consulta-centro-custo"><mat-icon>search</mat-icon> Consulta</a></li>
 
         </ul>
 
         <!-- SUPRIMENTOS COM SUBMENU -->
         <li (click)="toggleSubMenu('suprimentos')">
           <mat-icon>inventory</mat-icon> 
-          <span *ngIf="isExpanded">Suprimentos</span>
+          <span *ngIf="isExpanded">Plano de Conta</span>
           <mat-icon *ngIf="isExpanded">{{ submenus['suprimentos'] ? 'expand_less' : 'expand_more' }}</mat-icon>
         </li>
         <ul *ngIf="submenus['suprimentos']">
-          <li><a routerLink="/cadastro-suprimentos"><mat-icon>add</mat-icon>Cadastro Insumos</a></li>
-          <li><a routerLink="/consulta-suprimentos"><mat-icon>search</mat-icon>Consulta Insumos</a></li>
+          <li><a routerLink="/cadastro-suprimentos"><mat-icon>add</mat-icon>Cadastro</a></li>
+          <li><a routerLink="/consulta-suprimentos"><mat-icon>search</mat-icon>Consulta</a></li>
         </ul>
 
         <!-- RELATÓRIOS -->

@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { CadastroAgenteModalComponent } from 'src/app/components/cadastro-agente-modal/cadastro-agente-modal.component';
 import { SuprimentosService } from 'src/app/services/suprimentos.service';
+import { ActivatedRoute } from '@angular/router';
+import { CentroCustoService } from 'src/app/services/centro-custo.service';
+
 
 @Component({
   selector: 'app-cadastro-suprimentos',
@@ -24,7 +27,8 @@ export class CadastroSuprimentosComponent implements OnInit {
   mostrarPlanoConta3 = false;
   mostrarPlanoConta4 = false;
 
-  constructor(private fb: FormBuilder, private suprimentosService: SuprimentosService,private dialog: MatDialog) {}
+  constructor(private fb: FormBuilder, private route: ActivatedRoute,
+    private centroCustoService: CentroCustoService, private suprimentosService: SuprimentosService,private dialog: MatDialog) {}
 
   ngOnInit() {
     this.suprimentoForm = this.fb.group({
@@ -46,6 +50,20 @@ export class CadastroSuprimentosComponent implements OnInit {
     
 
     this.carregarDados();
+
+    this.route.paramMap.subscribe(params => {
+      const idCentroCusto = params.get('idCentroCusto');
+      if (idCentroCusto) {
+        this.preencherCentroCusto(idCentroCusto);
+      }
+    });
+  }
+  preencherCentroCusto(id: string) {
+    this.centroCustoService.buscarPorId(Number(id)).subscribe(centro => {
+      this.suprimentoForm.patchValue({
+        centroCusto: centro.idctocusto // Preenche automaticamente
+      });
+    });
   }
 
   carregarDados() {

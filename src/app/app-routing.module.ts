@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'consulta-usuario', component: ConsultaUsuarioComponent, canActivate: [AuthGuard] },
   { path: 'cadastro-centro-custo', component: CentroCustoComponent, canActivate: [AuthGuard]  }, 
   { path: 'consulta-centro-custo', component: ConsultaCentroCustoComponent, canActivate: [AuthGuard]  }, 
+  { path: 'cadastro-suprimentos/:idCentroCusto', component: CadastroSuprimentosComponent, canActivate: [AuthGuard] },
   { path: 'cadastro-suprimentos', component: CadastroSuprimentosComponent, canActivate: [AuthGuard]  }, 
   { path: 'consulta-suprimentos', component: ConsultaSuprimentosComponent, canActivate: [AuthGuard]  }, 
   { path: 'relatorios', component: RelatoriosComponent, canActivate: [AuthGuard]  }, 
