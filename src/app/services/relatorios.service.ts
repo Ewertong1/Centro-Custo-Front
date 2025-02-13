@@ -18,11 +18,12 @@ export class RelatoriosService {
     });
   }
 
-  obterRelatorioSintetico(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/sintetico`, { headers: this.getHeaders() });
+  obterRelatorioSintetico(idCentroCusto: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/sintetico/${idCentroCusto}`, { headers: this.getHeaders() });
   }
-
-  obterRelatorioAnalitico(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/analitico`, { headers: this.getHeaders() });
+  
+  obterRelatorioAnalitico(idCentroCusto: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/analitico/${idCentroCusto}`, { headers: this.getHeaders() });
   }
+  
 }

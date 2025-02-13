@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RelatoriosService } from 'src/app/services/relatorios.service';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { SuprimentosService } from 'src/app/services/suprimentos.service';
 
 @Component({
   selector: 'app-relatorios',
@@ -10,40 +11,69 @@ import autoTable from 'jspdf-autotable';
 })
 export class RelatoriosComponent implements OnInit {
   tiposRelatorio = ['Sintético', 'Analítico'];
+  centrosCusto: any[] = [];
   tipoSelecionado: string = 'Sintético';
   relatorioDados: any[] = [];
+  centroCustoSelecionado: any;
+  resultadoFinal: number = 0;
   displayedColumns: string[] = [];
   displayedColumnTitles: { [key: string]: string } = {}; 
   
 
-  constructor(private relatoriosService: RelatoriosService) {}
+  constructor(private relatoriosService: RelatoriosService, private suprimentosService: SuprimentosService) {}
 
   ngOnInit(): void {
-    this.carregarRelatorio();
+    //this.carregarRelatorio();
+    this.carregarDados();
   }
   
 //preciso que adicione como o footer o valor total de movimentado junto com o total
 
-  carregarRelatorio() {
-    if (this.tipoSelecionado === 'Sintético') {
-      this.relatoriosService.obterRelatorioSintetico().subscribe(data => {
-        this.relatorioDados = data;
-        this.displayedColumns = ['descricao', 'totalMovimentado'];
-        this.displayedColumnTitles = { descricao: 'Descrição', totalMovimentado: 'Total Apurado' };
-      });
-    } else {
-      this.relatoriosService.obterRelatorioAnalitico().subscribe(data => {
-        this.relatorioDados = data;
-        this.displayedColumns = ['descricaoNivel1', 'descricaoNivel2', 'descricaoNivel3', 'descricaoNivel4', 'totalMovimentado'];
-        this.displayedColumnTitles = {
-          descricaoNivel1: 'Nível 1',
-          descricaoNivel2: 'Nível 2',
-          descricaoNivel3: 'Nível 3',
-          descricaoNivel4: 'Nível 4',
-          totalMovimentado: 'Total Apurado'
-        };
-      });
-    }
+carregarRelatorio() {
+  if (!this.centroCustoSelecionado) {
+    alert('Selecione um Centro de Custo antes de carregar o relatório.');
+    return;
+  }
+
+  if (this.tipoSelecionado === 'Sintético') {
+    this.relatoriosService.obterRelatorioSintetico(this.centroCustoSelecionado).subscribe(data => {
+      this.relatorioDados = data;
+      this.calcularResultado();
+      this.displayedColumns = ['descricao', 'totalMovimentado'];
+      this.displayedColumnTitles = { descricao: 'Descrição', totalMovimentado: 'Total Apurado' };
+    });
+  } else {
+    this.relatoriosService.obterRelatorioAnalitico(this.centroCustoSelecionado).subscribe(data => {
+      this.relatorioDados = data;
+      this.displayedColumns = ['descricaoNivel1', 'descricaoNivel2', 'descricaoNivel3', 'descricaoNivel4', 'totalMovimentado'];
+      this.displayedColumnTitles = {
+        descricaoNivel1: 'Nível 1',
+        descricaoNivel2: 'Nível 2',
+        descricaoNivel3: 'Nível 3',
+        descricaoNivel4: 'Nível 4',
+        totalMovimentado: 'Total Apurado'
+      };
+    });
+  }
+}
+
+
+calcularResultado() {
+  let receita = 0;
+  let custos = 0;
+  let despesas = 0;
+
+  this.relatorioDados.forEach(item => {
+    if (item.descricao.includes('RECEITA')) receita += item.totalMovimentado;
+    if (item.descricao.includes('CUSTOS')) custos += item.totalMovimentado;
+    if (item.descricao.includes('DESPESAS')) despesas += item.totalMovimentado;
+  });
+
+  this.resultadoFinal = receita - custos - despesas;
+}
+
+  carregarDados() {
+    this.suprimentosService.listarCentrosCusto().subscribe(data => this.centrosCusto = data);
   }
   
   getTotalMovimentado(): number {

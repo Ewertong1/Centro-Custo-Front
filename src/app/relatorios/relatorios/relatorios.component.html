@@ -1,5 +1,15 @@
 <div class="container">
   <h2>Relatórios de Centro de Custo</h2>
+<div class="row" style="display: flex; justify-content: space-between;">
+  <mat-form-field appearance="outline">
+    <mat-label>Centro de Custo</mat-label>
+    <mat-select [(ngModel)]="centroCustoSelecionado">
+      <mat-option *ngFor="let centro of centrosCusto" [value]="centro.idctocusto">
+        {{ centro.nome }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  
 
   <mat-form-field class="full-width">
     <mat-label>Tipo de Relatório</mat-label>
@@ -7,6 +17,7 @@
       <mat-option *ngFor="let tipo of tiposRelatorio" [value]="tipo">{{ tipo }}</mat-option>
     </mat-select>
   </mat-form-field>
+</div>
   <div class="table-container">
   <table mat-table [dataSource]="relatorioDados" class="mat-elevation-z8" *ngIf="relatorioDados.length > 0">
     <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
