@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -11,15 +12,22 @@ export class RelatoriosService {
   constructor(private http: HttpClient) {}
 
   private getHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token'); 
+    const token = localStorage.getItem('token');
+    if (!token) {
+        console.warn('Token não encontrado no localStorage!');
+    }
     return new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token || ''}`
     });
-  }
+}
+
 
   obterRelatorioSintetico(idCentroCusto: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/sintetico/${idCentroCusto}`, { headers: this.getHeaders() });
+    console.log(this.getHeaders());
+    return this.http.get<any[]>(`${this.apiUrl}/sintetico?idCentroCusto=${idCentroCusto}`, { headers: this.getHeaders() });
+
+    // return this.http.get<any[]>(`${this.apiUrl}/sintetico/${idCentroCusto}`, { headers: this.getHeaders() });
   }
   
   obterRelatorioAnalitico(idCentroCusto: number): Observable<any[]> {

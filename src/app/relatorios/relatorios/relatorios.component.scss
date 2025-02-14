@@ -54,4 +54,20 @@
       text-align: left;
     }
   }
-  
+  /* Estiliza a linha do resultado */
+/* Estiliza a linha do resultado */
+.highlight-row {
+  background-color: #e0f7fa; /* Azul claro */
+  font-weight: bold;
+  color: #01579b; /* Azul escuro */
+  text-align: center; /* Alinha o texto no centro */
+}
+
+/* Estiliza o cabeçalho da tabela */
+.header-highlight {
+  background-color: #1976d2; /* Cor azul do relatório */
+  color: #ffffff; /* Texto branco para contraste */
+  font-weight: bold;
+  text-align: center;
+}
+

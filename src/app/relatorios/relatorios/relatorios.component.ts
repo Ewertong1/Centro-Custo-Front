@@ -12,7 +12,7 @@ import { SuprimentosService } from 'src/app/services/suprimentos.service';
 export class RelatoriosComponent implements OnInit {
   tiposRelatorio = ['Sintético', 'Analítico'];
   centrosCusto: any[] = [];
-  tipoSelecionado: string = 'Sintético';
+  tipoSelecionado: string | null = null;
   relatorioDados: any[] = [];
   centroCustoSelecionado: any;
   resultadoFinal: number = 0;
@@ -38,7 +38,7 @@ carregarRelatorio() {
   if (this.tipoSelecionado === 'Sintético') {
     this.relatoriosService.obterRelatorioSintetico(this.centroCustoSelecionado).subscribe(data => {
       this.relatorioDados = data;
-      this.calcularResultado();
+     // this.calcularResultado();
       this.displayedColumns = ['descricao', 'totalMovimentado'];
       this.displayedColumnTitles = { descricao: 'Descrição', totalMovimentado: 'Total Apurado' };
     });
