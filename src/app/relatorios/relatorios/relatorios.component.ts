@@ -40,7 +40,7 @@ carregarRelatorio() {
       this.relatorioDados = data;
      // this.calcularResultado();
       this.displayedColumns = ['descricao', 'totalMovimentado'];
-      this.displayedColumnTitles = { descricao: 'Descrição', totalMovimentado: 'Total Apurado' };
+      this.displayedColumnTitles = { descricao: 'Plano de Conta', totalMovimentado: 'Total Apurado' };
     });
   } else {
     this.relatoriosService.obterRelatorioAnalitico(this.centroCustoSelecionado).subscribe(data => {
@@ -131,6 +131,12 @@ calcularResultado() {
         doc.text(`Período: ${formatarData(centro?.dataInicio)} a ${formatarData(centro?.dataPrevistaEntrega)}`, leftMargin, 60);
         doc.text(`Eng. Responsável: ${centro?.responsavel}`, leftMargin, 70);
 
+        // Adicionando o campo "Tipo de Relatório" com margem abaixo
+        doc.text(`Tipo de Relatório: ${this.tipoSelecionado}`, leftMargin, 80);
+
+        // Adicionando espaço entre o tipo de relatório e a tabela
+        let tabelaInicioY = 90;
+
         // Criando cabeçalho da tabela com largura total
         const colunas = this.displayedColumns.map(col => this.displayedColumnTitles[col]);
         const dadosTabela = this.relatorioDados.map(item =>
@@ -142,7 +148,7 @@ calcularResultado() {
         );
 
         autoTable(doc, {
-            startY: 80,
+            startY: tabelaInicioY,
             margin: { left: 10, right: 10 }, // Ajustando para ocupar a largura total
             tableWidth: 'auto',
             head: [colunas],
@@ -167,6 +173,7 @@ calcularResultado() {
         doc.save('RelatorioCentroCusto.pdf');
     };
 }
+
 
 
 
