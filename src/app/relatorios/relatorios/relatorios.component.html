@@ -18,19 +18,21 @@
     </mat-select>
   </mat-form-field>
 </div>
-<div class="table-container">
+<div class="table-container" 
+     [ngClass]="{'table-container-sintetico': tipoSelecionado === 'Sintético', 'table-container-analitico': tipoSelecionado === 'Analítico'}">
   <table mat-table [dataSource]="relatorioDados" class="mat-elevation-z8" *ngIf="relatorioDados.length > 0">
     <!-- Definindo dinamicamente as colunas -->
     <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
       <th mat-header-cell *matHeaderCellDef class="header-highlight">{{ displayedColumnTitles[column] }}</th>
       <td mat-cell *matCellDef="let element" [ngClass]="{'highlight-row': element.descricao === 'RESULTADO'}">
-        <ng-container *ngIf="column === 'totalMovimentado'; else defaultColumn">
+        <ng-container *ngIf="column === 'totalMovimentado' || column === 'valor_total' || column === 'valor_unitario'; else defaultColumn">
           {{ element[column] | currency:'BRL':'symbol':'1.2-2' }}
         </ng-container>
         <ng-template #defaultColumn>
           {{ element[column] }}
         </ng-template>
       </td>
+      
     </ng-container>
 
     <!-- Cabeçalho -->
@@ -38,13 +40,20 @@
 
     <!-- Linhas de dados -->
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
   </table>
 </div>
 
 
 
 
-  <button mat-button color="primary" (click)="gerarPDF()" *ngIf="relatorioDados.length > 0">
-    Exportar PDF
-  </button>
+
+<button mat-button color="primary" (click)="gerarPDF()" *ngIf="relatorioDados.length > 0 && tipoSelecionado === 'Sintético'">
+  Exportar PDF Sintético
+</button>
+
+<button mat-button color="primary" (click)="gerarPDFAnalitico()" *ngIf="relatorioDados.length > 0 && tipoSelecionado === 'Analítico'">
+  Exportar PDF Analítico
+</button>
+
 </div>

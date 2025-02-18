@@ -45,14 +45,19 @@ carregarRelatorio() {
   } else {
     this.relatoriosService.obterRelatorioAnalitico(this.centroCustoSelecionado).subscribe(data => {
       this.relatorioDados = data;
-      this.displayedColumns = ['descricaoNivel1', 'descricaoNivel2', 'descricaoNivel3', 'descricaoNivel4', 'totalMovimentado'];
-      this.displayedColumnTitles = {
-        descricaoNivel1: 'Nível 1',
-        descricaoNivel2: 'Nível 2',
-        descricaoNivel3: 'Nível 3',
-        descricaoNivel4: 'Nível 4',
-        totalMovimentado: 'Total Apurado'
-      };
+      this.displayedColumns = ['nivel', 'subnivel', 'categoria', 'item', 'descricao', 'und', 'quant', 'valor_unitario', 'valor_total'];
+this.displayedColumnTitles = {
+    nivel: 'Nível',
+    subnivel: 'Subnível',
+    categoria: 'categoria',
+    item: 'Item',
+    descricao: 'Descrição',
+    und: 'Unid.',
+    quant: 'Quant.',
+    valor_unitario: 'Valor Unitário',
+    valor_total: 'Valor Total'
+};
+
     });
   }
 }
@@ -174,12 +179,64 @@ calcularResultado() {
     };
 }
 
+gerarPDFAnalitico() {
+  if (!this.relatorioDados || this.relatorioDados.length === 0) {
+    alert('Não há dados para gerar o relatório analítico.');
+    return;
+  }
+
+  const doc = new jsPDF();
+
+  // Adicionando o logo e cabeçalho
+  const logoPath = '../../../assets/img/LOGOA2PNG.png';
+  const img = new Image();
+  img.src = logoPath;
+
+  img.onload = () => {
+    // Cabeçalho azul
+    doc.setFillColor(0, 51, 153);
+    doc.rect(10, 10, 190, 30, 'F');
+    doc.addImage(img, 'PNG', 12, 11, 35, 28);
+
+    doc.setFontSize(20);
+    doc.setTextColor(255, 255, 255);
+    doc.text('RELATÓRIO GERENCIAL', 60, 28);
+
+    doc.setFontSize(12);
+    doc.setTextColor(0, 0, 0);
+    const centro = this.centrosCusto.find(c => c.idctocusto === this.centroCustoSelecionado);
+    doc.text(`Centro de Custo: ${centro?.nome || ''}`, 10, 50);
+    doc.text(`Período: ${new Date(centro?.dataInicio).toLocaleDateString('pt-BR')} a ${new Date(centro?.dataPrevistaEntrega).toLocaleDateString('pt-BR')}`, 10, 60);
+    doc.text(`Eng. Responsável: ${centro?.responsavel}`, 10, 70);
+    doc.text(`Tipo de Relatório: ${this.tipoSelecionado}`, 10, 80);
+
+    const colunas = this.displayedColumns.map(col => this.displayedColumnTitles[col]);
+
+    // Gerando os dados da tabela com formatação para o valor unitário
+    const dadosTabela = this.relatorioDados.map(item =>
+      this.displayedColumns.map(col => {
+        if (col === 'valor_unitario' || col === 'valor_total') {
+          return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item[col]);
+        } else {
+          return item[col];
+        }
+      })
+    );
+
+    autoTable(doc, {
+      startY: 90,
+      head: [colunas],
+      body: dadosTabela,
+      styles: { fontSize: 10, cellPadding: 4 },
+      theme: 'grid',
+      headStyles: { fillColor: [0, 51, 153], textColor: [255, 255, 255] },
+      bodyStyles: { fillColor: [245, 245, 245] },
+    });
+
+    doc.save('Relatorio_Analitico.pdf');
+  };
+}
 
 
-
-
-
-
-  
   
 }

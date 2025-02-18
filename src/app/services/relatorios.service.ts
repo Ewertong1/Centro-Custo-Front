@@ -31,7 +31,15 @@ export class RelatoriosService {
   }
   
   obterRelatorioAnalitico(idCentroCusto: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/analitico/${idCentroCusto}`, { headers: this.getHeaders() });
+    return this.http.get<any[]>(`${this.apiUrl}/analitico?idCentroCusto=${idCentroCusto}`, { headers: this.getHeaders() });
   }
   
+
+
+
+  getTotalSuprimentos(idCentroCusto: number): Observable<any[]>  {
+    return this.http.get<any[]>(`${this.apiUrl}/total-suprimentos?idCentroCusto=${idCentroCusto}`, { headers: this.getHeaders() });
+  }
+
+
 }
