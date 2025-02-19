@@ -231,6 +231,14 @@ gerarPDFAnalitico() {
       theme: 'grid',
       headStyles: { fillColor: [0, 51, 153], textColor: [255, 255, 255] },
       bodyStyles: { fillColor: [245, 245, 245] },
+      didParseCell: function (data) {
+        if (data.row.index === dadosTabela.length - 1) {
+          data.cell.styles.fillColor = [108, 162, 216]; //rgb(108, 162, 216)
+          data.cell.styles.textColor = [255, 255, 255]; // Caso queira texto branco
+          data.cell.styles.fontStyle = 'bold'; // Se quiser negrito, por exemplo
+        }
+        
+      }
     });
 
     doc.save('Relatorio_Analitico.pdf');

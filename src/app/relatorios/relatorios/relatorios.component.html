@@ -24,7 +24,8 @@
     <!-- Definindo dinamicamente as colunas -->
     <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
       <th mat-header-cell *matHeaderCellDef class="header-highlight">{{ displayedColumnTitles[column] }}</th>
-      <td mat-cell *matCellDef="let element" [ngClass]="{'highlight-row': element.descricao === 'RESULTADO'}">
+        <td mat-cell *matCellDef="let element" [ngClass]="{'highlight-row': element.descricao === 'RESULTADO' || element.descricao === 'RESULTADO TOTAL -->'}">
+
         <ng-container *ngIf="column === 'totalMovimentado' || column === 'valor_total' || column === 'valor_unitario'; else defaultColumn">
           {{ element[column] | currency:'BRL':'symbol':'1.2-2' }}
         </ng-container>
