@@ -149,7 +149,7 @@ export class CadastroSuprimentosComponent implements OnInit {
           idagente: formValue.agente,
           //precoUnitario: parseFloat(formValue.precoUnitario.toString().replace(',', '.')),
           precoUnitario: parseFloat(formValue.precoUnitario.toString().replace(/\./g, '').replace(',', '.')),
-
+          idSuprimento: this.suprimentoId || null, 
           idCentroCusto: formValue.centroCusto,
           unidadeMedidaId: formValue.unidadeMedida,
           dtInicio: formValue.dataInicio,
