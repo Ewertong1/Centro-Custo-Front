@@ -50,10 +50,31 @@ export class SuprimentosService {
   }
 
   salvar(suprimento: any): Observable<any> {
+    suprimento.tipo = suprimento.tipo.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+
     return this.http.post<any>(`${this.apiUrl}/suprimentos`, suprimento, { headers: this.getHeaders() });
   }
 
   consultarSuprimentos(filtros: { nome: string, idAgente: number, idCentroCusto: number }): Observable<any[]> {
     return this.http.post<any[]>(`${this.apiUrl}/suprimentos/consulta`, filtros, { headers: this.getHeaders() });
   }
+
+// 🔥 Buscar por ID com o token
+buscarPorId(id: number): Observable<any> {
+  return this.http.get<any>(`${this.apiUrl}/suprimentos/${id}`, { headers: this.getHeaders() });
+}
+
+// 🔥 Atualizar com o token
+atualizar(id: number, suprimento: any): Observable<any> {
+  return this.http.put(`${this.apiUrl}/suprimentos/${id}`, suprimento, { headers: this.getHeaders() });
+}
+excluir(id: number): Observable<any> {
+  return this.http.delete(`${this.apiUrl}/suprimentos/${id}`, { headers: this.getHeaders() });
+}
+
+// 🔥 Cadastrar com o token
+cadastrar(suprimento: any): Observable<any> {
+  return this.http.post(this.apiUrl, suprimento, { headers: this.getHeaders() });
+}
+  
 }

@@ -15,7 +15,7 @@ export class ConsultaSuprimentosComponent implements OnInit {
   displayedColumns: string[] = [
     'nomeSuprimento', 'nomeAgente', 'qtd', 'precoUnitario',
     'descricaoPlanoNivel1', 'descricaoPlanoNivel2', 
-    'descricaoPlanoNivel3', 'descricaoPlanoNivel4'
+    'descricaoPlanoNivel3', 'descricaoPlanoNivel4', 'acao'
   ];
   
   constructor(private fb: FormBuilder, private suprimentosService: SuprimentosService) {}
@@ -50,5 +50,16 @@ export class ConsultaSuprimentosComponent implements OnInit {
   limparFiltros() {
     this.filtroForm.reset();
     this.suprimentos = [];
+  }
+  excluirSuprimento(id: number) {
+    this.suprimentosService.excluir(id).subscribe(
+      () => {
+        this.suprimentos = this.suprimentos.filter(suprimento => suprimento.id !== id);
+      },
+      error => {
+        console.error('Erro ao excluir suprimento:', error);
+      }
+    );
+    this.consultarSuprimentos();
   }
 }

@@ -5,6 +5,7 @@ import { CadastroAgenteModalComponent } from 'src/app/components/cadastro-agente
 import { SuprimentosService } from 'src/app/services/suprimentos.service';
 import { ActivatedRoute } from '@angular/router';
 import { CentroCustoService } from 'src/app/services/centro-custo.service';
+import normalize from 'normalize-text';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class CadastroSuprimentosComponent implements OnInit {
   planosContaNivel2: any[] = [];
   planosContaNivel3: any[] = [];
   planosContaNivel4: any[] = [];
+  suprimentoId: number | null = null;
   
   mostrarPlanoConta2 = false;
   mostrarPlanoConta3 = false;
@@ -47,7 +49,13 @@ export class CadastroSuprimentosComponent implements OnInit {
       dataFim: [''],
       custoAdmin: [false]
     });
-    
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id_suprimento');
+      if (id) {
+        this.suprimentoId = +id;
+        this.carregarSuprimento(this.suprimentoId);
+      }
+    });
 
     this.carregarDados();
 
@@ -139,7 +147,9 @@ export class CadastroSuprimentosComponent implements OnInit {
           fornecedor: formValue.fornecedor || null,
           quantidade: formValue.quantidade,
           idagente: formValue.agente,
-          precoUnitario: parseFloat(formValue.precoUnitario.toString().replace(',', '.')),
+          //precoUnitario: parseFloat(formValue.precoUnitario.toString().replace(',', '.')),
+          precoUnitario: parseFloat(formValue.precoUnitario.toString().replace(/\./g, '').replace(',', '.')),
+
           idCentroCusto: formValue.centroCusto,
           unidadeMedidaId: formValue.unidadeMedida,
           dtInicio: formValue.dataInicio,
@@ -194,5 +204,46 @@ onPlanoContaChange(nivel: number, idPlanoConta: number) {
   irParaConsulta() {
     window.location.href = '/consulta-suprimentos';
   }
+
+  carregarSuprimento(id: number) {
+    // Primeiro, carregar os tipos de pagamento
+   
+    this.suprimentosService.listarTiposPagamento().subscribe(data => {
+      this.tiposPagamento = data; // Agora já temos os tipos de pagamento carregados
+      console.log('Valores disponíveis no dropdown:', this.tiposPagamento.map(tp => tp.descricao));
+  
+      // Depois que os tipos de pagamento foram carregados, buscar os dados do suprimento
+      this.suprimentosService.buscarPorId(id).subscribe(suprimento => {
+        console.log('Dados do suprimento recebido:', suprimento);
+        console.log('Valor de tipoPagamento recebido:', suprimento.tipo);
+  
+        // Normalizar os valores removendo espaços e convertendo para minúsculas
+        const tipoSuprimento = normalize(suprimento.tipo.trim().toLowerCase());
+        const tipoFormatado = this.tiposPagamento.find(tp =>
+          normalize(tp.descricao.trim().toLowerCase()) === tipoSuprimento
+        )?.descricao;
+  
+        
+  
+        // Atualizar o formulário com os dados do suprimento
+        this.suprimentoForm.patchValue({
+          idSuprimento: suprimento.idSuprimento, 
+          nome: suprimento.nome,
+          quantidade: suprimento.quantidade,
+          precoUnitario: suprimento.precoUnitario,
+          tipoPagamento: tipoFormatado || suprimento.tipo, // Se não encontrar, usa o original
+          agente: suprimento.idagente,
+          centroCusto: suprimento.centroCusto.idctocusto,
+          unidadeMedida: suprimento.idUnidadeMedida?.idUnidademedida,
+          dataInicio: suprimento.dtinicio,
+        });
+        console.log('Tipo de Pagamento após ajuste:', this.suprimentoForm);
+        console.log("Lista de Centros de Custo:", this.centrosCusto);
+
+      });
+    });
+  }
+
+
   
 }
