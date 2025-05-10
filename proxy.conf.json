@@ -1,6 +1,6 @@
 {
     "/api": {
-      "target": "http://santaizabel.net.br:8080",
+      "target": "https://santaizabel.net.br:8080",
       "secure": false,
       "changeOrigin": true,
       "logLevel": "debug"

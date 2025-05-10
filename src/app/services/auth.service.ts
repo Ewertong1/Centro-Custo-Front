@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://santaizabel.net.br:8080/api/auth/login';
+  private apiUrl = 'https://santaizabel.net.br:8080/api/auth/login';
 
   constructor(private http: HttpClient , private router: Router) {}
 
@@ -28,7 +28,7 @@ export class AuthService {
     const token = localStorage.getItem('token'); // Pega o token do localStorage
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`); // Adiciona o token ao cabeçalho
     
-    return this.http.get<any>('http://santaizabel.net.br:8080/api/pessoas', { headers });
+    return this.http.get<any>('https://santaizabel.net.br:8080/api/pessoas', { headers });
   }
   getToken(): string | null {
     return localStorage.getItem('token');

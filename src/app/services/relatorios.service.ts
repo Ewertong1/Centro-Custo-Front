@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RelatoriosService {
-  private apiUrl = 'http://santaizabel.net.br:8080/api/relatorios';
+  private apiUrl = 'https://santaizabel.net.br:8080/api/relatorios';
 
   constructor(private http: HttpClient) {}
 

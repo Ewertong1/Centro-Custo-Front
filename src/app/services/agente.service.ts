@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root' // Torna o serviço acessível globalmente
 })
 export class AgenteService {
-  private apiUrl = 'http://santaizabel.net.br:8080/api';
+  private apiUrl = 'https://santaizabel.net.br:8080/api';
 
   constructor(private http: HttpClient) {}
 

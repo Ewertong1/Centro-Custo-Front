@@ -17,8 +17,8 @@ export interface Usuario {
 })
 export class UsuarioService {
   
-  private apiUrl = 'http://santaizabel.net.br:8080/api/auth/register';
-  private apiCon = 'http://santaizabel.net.br:8080/api';
+  private apiUrl = 'https://santaizabel.net.br:8080/api/auth/register';
+  private apiCon = 'https://santaizabel.net.br:8080/api';
   constructor(private http: HttpClient,private authService: AuthService) {}
 
   
