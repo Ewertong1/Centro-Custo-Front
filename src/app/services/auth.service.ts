@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://santaizabel.net.br/api/auth/login';
+  private apiUrl = environment.apiUrl + '/auth/login';
 
   constructor(private http: HttpClient , private router: Router) {}
 
@@ -25,10 +26,10 @@ export class AuthService {
   }
 
   getPessoas(): Observable<any> {
-    const token = localStorage.getItem('token'); // Pega o token do localStorage
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`); // Adiciona o token ao cabeçalho
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     
-    return this.http.get<any>('https://santaizabel.net.br/api/pessoas', { headers });
+    return this.http.get<any>(environment.apiUrl + '/pessoas', { headers });
   }
   getToken(): string | null {
     return localStorage.getItem('token');

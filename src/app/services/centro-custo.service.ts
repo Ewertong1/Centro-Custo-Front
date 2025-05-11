@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CentroCusto } from '../centro-custo/cadastro-centro-custo/cadastro-centro-custo.component';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CentroCustoService {
-  private apiUrl = 'https://santaizabel.net.br/api/centro-custo'; // Ajuste conforme necessário
+  private apiUrl = environment.apiUrl + '/centro-custo';
 
   constructor(private http: HttpClient) {}
 

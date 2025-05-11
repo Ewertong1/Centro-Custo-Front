@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { AuthService } from './auth.service';
+import { environment } from 'src/environments/environment';
 
 
 export interface Usuario {
@@ -17,8 +18,8 @@ export interface Usuario {
 })
 export class UsuarioService {
   
-  private apiUrl = 'https://santaizabel.net.br/api/auth/register';
-  private apiCon = 'https://santaizabel.net.br/api';
+  private apiUrl = environment.apiUrl + '/auth/register';
+  private apiCon = environment.apiUrl;
   constructor(private http: HttpClient,private authService: AuthService) {}
 
   
