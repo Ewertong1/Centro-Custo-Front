@@ -1,102 +1,19 @@
-<div class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
-  <!-- Container do Card -->
-  <div class="w-full max-w-md" [@fadeInUp]>
-    <!-- Card de Login -->
-    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 space-y-6">
-      <!-- Cabeçalho -->
-      <div class="text-center space-y-2">
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Bem-vindo</h1>
-        <p class="text-gray-600 dark:text-gray-400">Faça login para continuar</p>
+<div class="login-container">
+    <h2>Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="login">Login:</label>
+        <input id="login" type="text" formControlName="login" placeholder="Digite seu login" />
       </div>
-
-      <!-- Formulário -->
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6">
-        <!-- Campo de Login -->
-        <div class="space-y-2">
-          <div class="relative">
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <i class="fas fa-user text-gray-400"></i>
-            </div>
-            <input
-              type="text"
-              formControlName="login"
-              (focus)="onFocus('login')"
-              (blur)="onBlur()"
-              class="w-full pl-10 pr-4 py-2.5 rounded-lg border focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-              [ngClass]="{'border-red-500': loginForm.get('login')?.invalid && loginForm.get('login')?.touched}"
-              placeholder="Digite seu usuário"
-            >
-            <label class="absolute left-10 -top-2.5 bg-white dark:bg-gray-800 px-1 text-sm text-gray-600 dark:text-gray-400 transition-all"
-              [ngClass]="{'scale-75': loginForm.get('login')?.value, 'text-blue-500': isFieldFocused('login')}">
-              Usuário
-            </label>
-          </div>
-          <div *ngIf="loginForm.get('login')?.invalid && loginForm.get('login')?.touched" 
-               class="text-sm text-red-500 pl-3">
-            Campo obrigatório
-          </div>
-        </div>
-
-        <!-- Campo de Senha -->
-        <div class="space-y-2">
-          <div class="relative">
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <i class="fas fa-lock text-gray-400"></i>
-            </div>
-            <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
-              <button type="button" (click)="togglePasswordVisibility()" class="text-gray-400 hover:text-gray-500">
-                <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
-              </button>
-            </div>
-            <input
-              [type]="showPassword ? 'text' : 'password'"
-              formControlName="senha"
-              (focus)="onFocus('senha')"
-              (blur)="onBlur()"
-              class="w-full pl-10 pr-10 py-2.5 rounded-lg border focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-              [ngClass]="{'border-red-500': loginForm.get('senha')?.invalid && loginForm.get('senha')?.touched}"
-              placeholder="Digite sua senha"
-            >
-            <label class="absolute left-10 -top-2.5 bg-white dark:bg-gray-800 px-1 text-sm text-gray-600 dark:text-gray-400 transition-all"
-              [ngClass]="{'scale-75': loginForm.get('senha')?.value, 'text-blue-500': isFieldFocused('senha')}">
-              Senha
-            </label>
-          </div>
-          <div *ngIf="loginForm.get('senha')?.invalid && loginForm.get('senha')?.touched" 
-               class="text-sm text-red-500 pl-3">
-            Campo obrigatório
-          </div>
-        </div>
-
-        <!-- Lembrar usuário -->
-        <div class="flex items-center">
-          <input
-            type="checkbox"
-            id="remember"
-            formControlName="remember"
-            class="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700"
-          >
-          <label for="remember" class="ml-2 text-sm text-gray-600 dark:text-gray-400">
-            Lembrar usuário
-          </label>
-        </div>
-
-        <!-- Botão de Login -->
-        <button
-          type="submit"
-          [disabled]="loginForm.invalid || isLoading"
-          class="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-200 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          <span *ngIf="!isLoading">Entrar</span>
-          <div *ngIf="isLoading" class="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
-        </button>
-      </form>
-
-      <!-- Mensagem de Erro -->
-      <div *ngIf="errorMessage" class="text-center text-sm text-red-500">
-        {{ errorMessage }}
+  
+      <div class="form-group">
+        <label for="senha">Senha:</label>
+        <input id="senha" type="password" formControlName="senha" placeholder="Digite sua senha" />
       </div>
-    </div>
+  
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  
+      <button type="submit" [disabled]="loginForm.invalid">Entrar</button>
+    </form>
   </div>
-</div>
   
